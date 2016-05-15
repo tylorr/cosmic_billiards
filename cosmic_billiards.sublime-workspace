@@ -1,0 +1,1993 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"transf",
+				"transformComponent"
+			],
+			[
+				"fil",
+				"file_descriptor"
+			],
+			[
+				"gener",
+				"generated_pool"
+			],
+			[
+				"mess",
+				"message_binary"
+			],
+			[
+				"tran",
+				"transform"
+			],
+			[
+				"Up",
+				"UnpackTo"
+			],
+			[
+				"load",
+				"load_proto_message"
+			],
+			[
+				"meta",
+				"meta_path"
+			],
+			[
+				"c",
+				"c_str"
+			],
+			[
+				"met",
+				"meta_path"
+			],
+			[
+				"def",
+				"default_trans"
+			],
+			[
+				"proj",
+				"project_editor_"
+			],
+			[
+				"pars",
+				"parseState"
+			],
+			[
+				"stat",
+				"states"
+			],
+			[
+				"pro",
+				"program"
+			],
+			[
+				"ve",
+				"vec_array"
+			],
+			[
+				"draw_",
+				"draw_vec3"
+			],
+			[
+				"vec",
+				"vec3"
+			],
+			[
+				"field",
+				"field_descriptor"
+			],
+			[
+				"file",
+				"field_descriptor"
+			],
+			[
+				"imp",
+				"importer_"
+			],
+			[
+				"comp",
+				"component_messsage"
+			],
+			[
+				"res",
+				"resource_handle"
+			],
+			[
+				"all",
+				"allocator"
+			],
+			[
+				"Comp",
+				"ComponentEntry"
+			],
+			[
+				"dra",
+				"draw_component"
+			],
+			[
+				"component",
+				"component_descriptor"
+			],
+			[
+				"cop",
+				"component_descriptors_"
+			],
+			[
+				"sele",
+				"selected_entry_"
+			],
+			[
+				"add_Comp",
+				"add_components"
+			],
+			[
+				"des",
+				"descriptor"
+			],
+			[
+				"obj",
+				"object_collection"
+			],
+			[
+				"child",
+				"child_file_id"
+			],
+			[
+				"get",
+				"get_file_id"
+			],
+			[
+				"proto",
+				"proto_translation"
+			],
+			[
+				"transl",
+				"translation"
+			],
+			[
+				"qu",
+				"qualified_name"
+			],
+			[
+				"entit",
+				"entity_location"
+			],
+			[
+				"dag",
+				"dag_fbb"
+			],
+			[
+				"chil",
+				"child_location"
+			],
+			[
+				"Fla",
+				"FlatBufferBuilder"
+			],
+			[
+				"flat",
+				"flatbuffers"
+			],
+			[
+				"entity_p",
+				"entity_piv"
+			],
+			[
+				"Ent",
+				"EntityPiv"
+			],
+			[
+				"en",
+				"entity_ptr"
+			],
+			[
+				"ent",
+				"entity_ptr"
+			],
+			[
+				"scen",
+				"scene_entity_buffer"
+			],
+			[
+				"las",
+				"last_write_time_"
+			],
+			[
+				"gam",
+				"game_code"
+			],
+			[
+				"sour",
+				"source_dll_path"
+			],
+			[
+				"type",
+				"types_buffer"
+			],
+			[
+				"ST",
+				"StdAllocator"
+			],
+			[
+				"Uni",
+				"UniformBase"
+			],
+			[
+				"bit_",
+				"bit_span"
+			],
+			[
+				"Bit",
+				"BitSpan"
+			],
+			[
+				"bit_c",
+				"bit_count_"
+			],
+			[
+				"block",
+				"block_span_"
+			],
+			[
+				"All",
+				"AllocationBits"
+			],
+			[
+				"track",
+				"tracking_bits"
+			],
+			[
+				"trak",
+				"tracking_bits"
+			],
+			[
+				"blo",
+				"block_span_"
+			],
+			[
+				"ptr",
+				"ptrdiff_t"
+			],
+			[
+				"ex",
+				"extra_bits"
+			],
+			[
+				"ext",
+				"extra_bits_mask"
+			],
+			[
+				"siz",
+				"size_type"
+			],
+			[
+				"si",
+				"sizeof"
+			],
+			[
+				"Set",
+				"SECTION"
+			],
+			[
+				"bit",
+				"bit_span"
+			],
+			[
+				"size",
+				"size_type"
+			],
+			[
+				"cou",
+				"count_extra_bits"
+			],
+			[
+				"span",
+				"span_type"
+			],
+			[
+				"budy",
+				"buddy_block0"
+			],
+			[
+				"tra",
+				"tracking_bytes"
+			],
+			[
+				"uin",
+				"uint8_t"
+			],
+			[
+				"de",
+				"depth"
+			],
+			[
+				"fre",
+				"free_list_front"
+			],
+			[
+				"free",
+				"free_list_"
+			],
+			[
+				"ui",
+				"uint32_t"
+			],
+			[
+				"spl",
+				"split_bytes"
+			],
+			[
+				"bud",
+				"buddy_ptr"
+			],
+			[
+				"uint",
+				"uint32_t"
+			],
+			[
+				"allocationb",
+				"allocation_tracking_bytes"
+			],
+			[
+				"get_al",
+				"get_allocation_bit"
+			],
+			[
+				"get_",
+				"get_byte_bit_indices"
+			],
+			[
+				"byt",
+				"byte_index"
+			],
+			[
+				"by",
+				"byte_index"
+			],
+			[
+				"Budd",
+				"BuddyAllocator"
+			],
+			[
+				"spli",
+				"split_tracking_bytes"
+			],
+			[
+				"beg",
+				"begin"
+			],
+			[
+				"split_b",
+				"split_bytes"
+			],
+			[
+				"bu",
+				"buffer_start_"
+			],
+			[
+				"buff",
+				"buffer_end"
+			],
+			[
+				"be",
+				"begin"
+			],
+			[
+				"temp",
+				"temp_tracking_bytes"
+			],
+			[
+				"uit",
+				"uint8_t"
+			],
+			[
+				"in",
+				"index"
+			],
+			[
+				"fr",
+				"free_list_"
+			],
+			[
+				"hal",
+				"half_tracking_bytes"
+			],
+			[
+				"allo",
+				"allocate"
+			],
+			[
+				"byte",
+				"bytes_to_skip"
+			],
+			[
+				"par",
+				"parent_depth"
+			],
+			[
+				"ha",
+				"half_tracking_bytes"
+			],
+			[
+				"buf",
+				"buffer_start_"
+			],
+			[
+				"Mark",
+				"MarkAsAllocated"
+			],
+			[
+				"Nod",
+				"NodesAtDepth"
+			],
+			[
+				"In",
+				"Index"
+			],
+			[
+				"fir",
+				"first_free"
+			],
+			[
+				"ne",
+				"next"
+			],
+			[
+				"sec",
+				"second_node"
+			],
+			[
+				"cons",
+				"constexpr"
+			],
+			[
+				"Ind",
+				"IndexInLevel"
+			],
+			[
+				"u",
+				"uint16_t"
+			],
+			[
+				"dir",
+				"directory_path"
+			],
+			[
+				"eul",
+				"euler"
+			],
+			[
+				"eu",
+				"euler"
+			],
+			[
+				"euler",
+				"eulerAngles"
+			],
+			[
+				"glm",
+				"glm"
+			],
+			[
+				"loca",
+				"local"
+			],
+			[
+				"Dra",
+				"DrawTransform"
+			],
+			[
+				"rot",
+				"rotation"
+			],
+			[
+				"z",
+				"z_rot"
+			],
+			[
+				"Draw",
+				"DrawQuat"
+			],
+			[
+				"scal",
+				"scale_mat"
+			],
+			[
+				"transla",
+				"translation_mat"
+			],
+			[
+				"alloca",
+				"allocate_unique"
+			],
+			[
+				"sche",
+				"shcema"
+			],
+			[
+				"fie",
+				"fields"
+			],
+			[
+				"sch",
+				"schame_matrix"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "conf.lua",
+			"settings":
+			{
+				"buffer_size": 74,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.lua",
+			"settings":
+			{
+				"buffer_size": 1486,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "collider_component.lua",
+			"settings":
+			{
+				"buffer_size": 652,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "transform_component.lua",
+			"settings":
+			{
+				"buffer_size": 534,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "entity_manager.lua",
+			"settings":
+			{
+				"buffer_size": 634,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "class.lua",
+			"settings":
+			{
+				"buffer_size": 1207,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Tylor/Downloads/examples_test/examples/102_physics_adv.lua",
+			"settings":
+			{
+				"buffer_size": 5234,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Lua Love/LuaLove.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					""
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"Love2D"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"ldoc: File"
+				],
+				[
+					"Packages/Lua Love/LuaLove.sublime-build",
+					"ldoc: Project"
+				]
+			],
+			[
+				"Packages/Lua Love/LuaLove.sublime-build",
+				"Love2D"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 150.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"lint",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssproto",
+				"Set Syntax: Protocol Buffer"
+			],
+			[
+				"sscmak",
+				"Set Syntax: CMake"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"sublimelinter",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"ind",
+				"Indent XML"
+			],
+			[
+				"index",
+				"Indent XML"
+			],
+			[
+				"in",
+				"Indent XML"
+			],
+			[
+				"indent",
+				"Indent XML"
+			],
+			[
+				"removepa",
+				"Package Control: Remove Package"
+			],
+			[
+				"package exp",
+				"PackageResourceViewer: Extract Package"
+			],
+			[
+				"ssxml",
+				"Set Syntax: XML"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"removep",
+				"Package Control: Remove Package"
+			],
+			[
+				"markd",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"ssprot",
+				"Set Syntax: Protocol Buffer"
+			],
+			[
+				"ssbash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"ssjava	",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ma",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"reident",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"sscoffe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"ssc#",
+				"Set Syntax: C#"
+			],
+			[
+				"ssglsl",
+				"Set Syntax: GLSL"
+			],
+			[
+				"ssc++",
+				"Set Syntax: C++"
+			],
+			[
+				"makr",
+				"Markdown Preview: Preview in Browser"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 217.0,
+		"history":
+		[
+			"import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Tylor/projects/cosmic_billiards"
+	],
+	"file_history":
+	[
+		"/C/Users/Tylor/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/C/Users/Tylor/Downloads/examples_test/examples/100_physics_mini.lua",
+		"/C/Users/Tylor/Downloads/examples_test/examples/102_physics_adv.lua",
+		"/C/Users/Tylor/Downloads/examples_test/conf.lua",
+		"/C/Users/Tylor/projects/cosmic_billiards/conf.lua",
+		"/C/Users/Tylor/Downloads/luarocks-2.3.0-win32/README.md",
+		"/C/Users/Tylor/projects/knight-engine/demo/game.cpp",
+		"/C/Users/Tylor/projects/knight-engine/include/editor/inspector.h",
+		"/C/Users/Tylor/projects/knight-engine/src/editor/inspector.cpp",
+		"/C/Users/Tylor/projects/knight-engine/include/editor/project_editor.h",
+		"/C/Users/Tylor/projects/knight-engine/src/editor/project_editor.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/json_util.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/internal/json_stream_parser.cc",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/transform_component.proto.meta",
+		"/C/Users/Tylor/projects/knight-engine/src/path.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/descriptor.h",
+		"/C/Users/Tylor/projects/knight-engine/src/CMakeLists.txt",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/meta.pb.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/stubs/status.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/include/flatbuffers/util.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/dynamic_message.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/any.pb.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/message_lite.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/message.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/stubs/stringpiece.h",
+		"/C/Users/Tylor/projects/knight-engine/include/common.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/stubs/common.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/json_util.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/internal/utility.h",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/meta.proto",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/map.h",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/transform_component.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/types.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/any.h",
+		"/C/Users/Tylor/projects/gradientmap/gradientmap.sublime-project",
+		"/E/lexer/lexer.js",
+		"/E/lexer/index.js",
+		"/C/Users/Tylor/projects/knight-engine/health.sm.js",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/map_test_util.cc",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/types.pb.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/glm/glm/detail/type_mat.hpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/generated_message_reflection.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/reflection_ops.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/any.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/any.cc",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/object_collection.proto",
+		"/C/Users/Tylor/projects/knight-engine/include/pointers.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/any.proto",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/meta.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/imgui/imgui_demo.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/imgui/imgui.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/compiler/importer.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/descriptor.proto",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/map_test.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/crossguid/guid.h",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/component.proto",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/transform_component.proto",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/component.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/compiler/command_line_interface.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/compiler/command_line_interface.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/json_util_test.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/io/zero_copy_stream.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/type_resolver_util.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/conformance/conformance_test.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/type_resolver.h",
+		"/C/Users/Tylor/projects/knight-engine/assets/schema/entity.fbs",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/conformance/conformance_cpp.cc",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/object_collection.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/src/google/protobuf/util/json_format_proto3.proto",
+		"/C/Users/Tylor/projects/knight-engine/demo/CMakeLists.txt",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/cmake/libprotobuf.cmake",
+		"/C/Users/Tylor/projects/knight-engine/build/proto/assets/proto/object_collection.pb.cc",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/cmake/tests.cmake",
+		"/C/Users/Tylor/projects/knight-engine/CMakeLists.txt",
+		"/C/Users/Tylor/projects/knight-engine/third-party/protobuf/cmake/CMakeLists.txt",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/include/flatbuffers/reflection.h",
+		"/C/Users/Tylor/projects/knight-engine/assets/schema/entity_list.fbs",
+		"/C/Users/Tylor/projects/knight-engine/assets/schema/transform_component.fbs",
+		"/C/msys64/mingw64/share/cmake-3.4/Modules/FindProtobuf.cmake",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/object_collection.fbs",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/src/idl_parser.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/src/idl_gen_fbs.cpp",
+		"/C/Users/Tylor/projects/knight-engine/build/third-party/protobuf/cmake/CMakeFiles/Export/lib/cmake/protobuf/protobuf-targets.cmake",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/object_collection.pb.h",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/object_collection.pb.cc",
+		"/C/Users/Tylor/projects/knight-engine/assets/proto/readme.txt",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/include/flatbuffers/flatbuffers.h",
+		"/C/Users/Tylor/projects/knight-engine/include/transform_component.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/include/flatbuffers/idl.h",
+		"/C/Users/Tylor/projects/knight-engine/src/buffer_object.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/src/idl_gen_text.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/samples/sample_text.cpp",
+		"/C/Users/Tylor/projects/knight-engine/build/schema_headers/entity_generated.h",
+		"/C/Users/Tylor/Documents/New Unity Project/Assets/test.unity",
+		"/C/Users/Tylor/projects/knight-engine/assets/schema/dag_test.fbs",
+		"/C/Users/Tylor/projects/knight-engine/build/schema_headers/dag_test_generated.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/build/VS2010/flatsampletext.vcxproj.user",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/src/reflection.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/tests/test.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/imgui/imgui.cpp",
+		"/C/Users/Tylor/projects/knight-engine/assets/schema/component_data.fbs",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/reflection/reflection.fbs",
+		"/C/Users/Tylor/projects/knight-engine/demo/game_code.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/glm/glm/detail/type_vec.hpp",
+		"/C/Users/Tylor/projects/knight-engine/include/vector.h",
+		"/C/msys64/mingw64/include/boost/filesystem/operations.hpp",
+		"/C/Users/Tylor/projects/knight-engine/demo/main.cpp",
+		"/C/Users/Tylor/projects/knight-engine/include/file_util.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/flatbuffers/src/flathash.cpp",
+		"/C/Users/Tylor/projects/knight-engine/demo/editor/project.h",
+		"/C/Users/Tylor/projects/knight-engine/demo/game_code.cpp",
+		"/C/Users/Tylor/projects/knight-engine/src/win32/file_util.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/system/include/boost/system/error_code.hpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/system/include/boost/system/config.hpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/filesystem/include/boost/filesystem/config.hpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/system/CMakeLists.txt",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/filesystem/include/boost/filesystem/operations.hpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/filesystem/include/boost/filesystem/path.hpp",
+		"/C/Users/Tylor/projects/knight-engine/include/win32/path.h",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/filesystem/example/file_status.cpp",
+		"/C/Users/Tylor/projects/knight-engine/src/buddy_allocator.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/logog/include/platform.hpp",
+		"/C/Users/Tylor/projects/knight-engine/assets/schema/types.fbs",
+		"/C/Users/Tylor/projects/knight-engine/src/material.cpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/filesystem/include/boost/filesystem.hpp",
+		"/C/Users/Tylor/projects/knight-engine/third-party/boost/filesystem/src/operations.cpp",
+		"/C/Users/Tylor/projects/knight-engine/include/string_util.h",
+		"/C/Users/Tylor/projects/knight-engine/src/string_util.cpp"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 99.0,
+		"where_history":
+		[
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\protobuf",
+			"",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\protobuf",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\protobuf,*.h",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\protobuf,*.cc,*.h",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\protobuf",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers,*.cpp,*.cc",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm,*.hpp,*.cpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm",
+			"",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\include",
+			"",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm,*.hpp,*.h,*.inl",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm,*.hpp,*.h",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\imgui,*.hpp,*.h",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm,*.hpp,*.h,*.cpp,*.inl",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm,*.hpp,*.h,*.cpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers,*.h,*.hpp,*.cpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\imgui",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm",
+			"",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers,*.h,*.cpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers",
+			"",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers,*.h,*.hpp,*.cpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\flatbuffers,*.h,*.hpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\,*.h,*.hpp",
+			"C:\\Users\\Tylor\\projects\\knight-engine\\third-party\\glm,*.h,*.hpp",
+			"",
+			"C:\\Users\\tylor\\projects\\streams\\client",
+			"C:\\Users\\tylor\\projects\\streams\\node_modules\\ampersand-app",
+			"",
+			"C:\\Users\\tylor\\projects\\streams\\client",
+			"C:\\Users\\tylor\\projects\\streams\\stylesheets",
+			"C:\\Users\\tylor\\projects\\streams\\client",
+			"",
+			"C:\\Users\\tylor\\projects\\knight-engine\\include,C:\\Users\\tylor\\projects\\knight-engine\\src,C:\\Users\\tylor\\projects\\knight-engine\\demo",
+			"",
+			"C:\\Users\\tylor\\projects\\knight-engine\\include",
+			"C:\\Users\\tylor\\projects\\knight-engine\\src",
+			"C:\\Users\\tylor\\projects\\knight-engine\\demo",
+			"",
+			"C:\\Users\\tylor\\projects\\knight-engine\\demo",
+			"C:\\Users\\tylor\\projects\\knight-engine\\src",
+			"",
+			"C:\\Users\\tylor\\projects\\knight-engine\\third-party\\glm,*.hpp",
+			"C:\\Users\\tylor\\projects\\knight-engine\\third-party\\glm",
+			"",
+			"*.coffee",
+			"*.coffe",
+			"",
+			"D:\\projects\\knight-engine\\third-party\\flatbuffers",
+			"",
+			"D:\\projects\\knight-engine\\src",
+			"D:\\projects\\knight-engine\\include",
+			"",
+			"D:\\projects\\knight-engine\\include",
+			"D:\\projects\\knight-engine\\src",
+			"D:\\projects\\knight-engine\\type_erasure",
+			"",
+			"D:\\projects\\knight-engine\\src",
+			"D:\\projects\\knight-engine\\include",
+			"D:\\projects\\knight-engine\\third-party\\imgui",
+			"*.cpp,*.h",
+			"*.cpp",
+			"",
+			"D:\\projects\\knight-engine\\src",
+			"",
+			"D:\\projects\\knight-engine\\demo",
+			"D:\\projects\\knight-engine\\src",
+			"",
+			"D:\\projects\\knight-engine\\third-party\\flatbuffers",
+			"",
+			"D:\\projects\\knight-engine\\include",
+			"",
+			"D:\\projects\\knight-engine\\third-party\\logog",
+			"D:\\projects\\knight-engine\\test",
+			"D:\\projects\\knight-engine\\third-party\\flatbuffers",
+			"",
+			"D:\\projects\\knight-engine\\third-party\\logog",
+			"",
+			"D:\\projects\\knight-engine\\include",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"pocket",
+			"love.graphics.getWidth()",
+			"love.graphics.getHeight()",
+			"Height",
+			"pocket",
+			"pocketBody",
+			"myBallBody",
+			"myBallFixture",
+			"myBallShape",
+			"myBallBody",
+			"win",
+			"myBallBody",
+			"myBallShape",
+			"myBallFixture",
+			"case",
+			"RunParser",
+			"any",
+			"map",
+			"RunParser",
+			"parsechunk(",
+			"parse",
+			"JsonToBinaryStream",
+			"  return JsonToBinaryStream(resolver, type_url, &input_stream, &output_stream);\nJsonToBinaryStream",
+			"JsonToBinaryStream",
+			"generated_pool",
+			"importer_",
+			"message_factory",
+			"load_proto_message",
+			"type_resolver_",
+			"load_proto",
+			"resource_handle",
+			"meta_binary",
+			"meta_json_str",
+			"meta_json_buffer",
+			"ParseFromString",
+			"c_str(",
+			"Code",
+			"Status {",
+			"JsonToBinaryStream",
+			"Status",
+			"FAILED_PRECONDITION",
+			"status",
+			"Status",
+			"status",
+			"JsonToBinaryStream",
+			"operator[]",
+			"message_factory",
+			"default_trans",
+			"translation",
+			"trans",
+			"find",
+			"defaults",
+			"load_resource_handle",
+			"write_resource_handle",
+			"project_editor",
+			"message_factory",
+			"project_editor",
+			"EntryType",
+			"project_editor",
+			"inspector",
+			"component_messsage",
+			"draw_component",
+			"states",
+			"nextSym",
+			"_checkNext",
+			"parens",
+			"->",
+			"InsertOrLookupMapValue",
+			"mapkey",
+			"size_t",
+			"MapKey",
+			"mapkey",
+			"\nMapkey",
+			"Mapkey",
+			"map",
+			"message",
+			"FieldDescriptor",
+			"protobuf_AssignDescriptorsOnce",
+			"descriptor",
+			"MessageFactory",
+			"MutableMessage",
+			"messagefactory",
+			"descriptor",
+			"descriptor ",
+			"draw_component",
+			"copyfrom",
+			"template",
+			"reinterpret_cast",
+			"draw_message",
+			"MutableMessage",
+			"message",
+			"type ",
+			"Type",
+			"type",
+			"Type",
+			"TYPE",
+			"Type",
+			"Getfield",
+			"GetReflection",
+			"descriptor(",
+			"descriptor",
+			"reflection",
+			"name",
+			"dynamic",
+			"dynamic_",
+			"type_url",
+			"type",
+			"type_url",
+			"descriptorpool",
+			"importer",
+			"draw_inspector",
+			"message_factory",
+			"draw_insp",
+			"component_descriptors_",
+			"DescriptorMap",
+			"defaults",
+			"find(",
+			"has",
+			"find",
+			"full_name",
+			"load_resource_handle",
+			"GetOrCreateMeta",
+			"GetOrCreateGuid",
+			"DynamicMessageFactory",
+			"message_factory",
+			"current_file_descriptors",
+			"component_descriptors",
+			"factorory_message"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"GlBind<$2> $1{$3};",
+			"GlBind<$2> $1{$3}",
+			"\\n"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "conf.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 74,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								74,
+								74
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "main.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1486,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								173,
+								173
+							]
+						],
+						"settings":
+						{
+							"_anf_new": "",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "collider_component.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 652,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								647,
+								647
+							]
+						],
+						"settings":
+						{
+							"_anf_new": "",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "transform_component.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								396,
+								404
+							]
+						],
+						"settings":
+						{
+							"_anf_new": "",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "entity_manager.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 634,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								136,
+								136
+							]
+						],
+						"settings":
+						{
+							"_anf_new": "",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "class.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1207,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								335,
+								335
+							]
+						],
+						"settings":
+						{
+							"_anf_new": "",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/Tylor/Downloads/examples_test/examples/102_physics_adv.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5234,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3974,
+								3977
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1656.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 51.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Lua Love/LuaLove.sublime-build",
+	"project": "cosmic_billiards.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"jsonstreamparser",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\internal\\json_stream_parser.cc"
+			],
+			[
+				"jsonutil",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\json_util.cc"
+			],
+			[
+				"inspeco",
+				"src\\editor\\inspector.cpp"
+			],
+			[
+				"proje",
+				"include\\editor\\project_editor.h"
+			],
+			[
+				"path.cpp",
+				"src\\path.cpp"
+			],
+			[
+				"descript",
+				"third-party\\protobuf\\src\\google\\protobuf\\descriptor.h"
+			],
+			[
+				"descriptor",
+				"third-party\\protobuf\\src\\google\\protobuf\\descriptor.h"
+			],
+			[
+				"message",
+				"third-party\\protobuf\\src\\google\\protobuf\\message_lite.h"
+			],
+			[
+				"message.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\message.h"
+			],
+			[
+				"meta.pb.cc",
+				"build\\proto\\assets\\proto\\meta.pb.cc"
+			],
+			[
+				"stringpie",
+				"third-party\\protobuf\\src\\google\\protobuf\\stubs\\stringpiece.h"
+			],
+			[
+				"protocommon",
+				"third-party\\protobuf\\src\\google\\protobuf\\stubs\\common.h"
+			],
+			[
+				"common.h",
+				"include\\common.h"
+			],
+			[
+				"status.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\stubs\\status.h"
+			],
+			[
+				"protoutil",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\internal\\utility.h"
+			],
+			[
+				"util.h",
+				"third-party\\flatbuffers\\include\\flatbuffers\\util.h"
+			],
+			[
+				"json_util",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\json_util.h"
+			],
+			[
+				"map.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\map.h"
+			],
+			[
+				"types.pb.h",
+				"build\\proto\\assets\\proto\\types.pb.h"
+			],
+			[
+				"tranpb.h",
+				"build\\proto\\assets\\proto\\transform_component.pb.h"
+			],
+			[
+				"any.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\any.h"
+			],
+			[
+				"transformcomponent.pb.h",
+				"build\\proto\\assets\\proto\\transform_component.pb.h"
+			],
+			[
+				"meta",
+				"assets\\proto\\meta.proto"
+			],
+			[
+				"inspec",
+				"src\\editor\\inspector.cpp"
+			],
+			[
+				"dynamic_m",
+				"third-party\\protobuf\\src\\google\\protobuf\\dynamic_message.h"
+			],
+			[
+				"proj",
+				"src\\editor\\project_editor.cpp"
+			],
+			[
+				"project",
+				"include\\editor\\project_editor.h"
+			],
+			[
+				"game",
+				"demo\\game.cpp"
+			],
+			[
+				"main",
+				"demo\\main.cpp"
+			],
+			[
+				"types.pb",
+				"build\\proto\\assets\\proto\\types.pb.cc"
+			],
+			[
+				"dynamic",
+				"third-party\\protobuf\\src\\google\\protobuf\\dynamic_message.h"
+			],
+			[
+				"reflection_ops.cc",
+				"third-party\\protobuf\\src\\google\\protobuf\\reflection_ops.cc"
+			],
+			[
+				"imgui.h",
+				"third-party\\imgui\\imgui.h"
+			],
+			[
+				"dynami",
+				"third-party\\protobuf\\src\\google\\protobuf\\dynamic_message.h"
+			],
+			[
+				"any.pb.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\any.pb.h"
+			],
+			[
+				"projec",
+				"include\\editor\\project_editor.h"
+			],
+			[
+				"descrip",
+				"third-party\\protobuf\\src\\google\\protobuf\\descriptor.h"
+			],
+			[
+				"importer.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\compiler\\importer.h"
+			],
+			[
+				"any.cc",
+				"third-party\\protobuf\\src\\google\\protobuf\\any.cc"
+			],
+			[
+				"any.pb",
+				"third-party\\protobuf\\src\\google\\protobuf\\any.pb.cc"
+			],
+			[
+				"any.pro",
+				"third-party\\protobuf\\src\\google\\protobuf\\any.proto"
+			],
+			[
+				"meta.pb.h",
+				"build\\proto\\assets\\proto\\meta.pb.h"
+			],
+			[
+				"objec_c",
+				"assets\\proto\\object_collection.proto"
+			],
+			[
+				"meta.pro",
+				"assets\\proto\\meta.proto"
+			],
+			[
+				"pointers.h",
+				"include\\pointers.h"
+			],
+			[
+				"guid.h",
+				"third-party\\crossguid\\guid.h"
+			],
+			[
+				"descriptor.pro",
+				"third-party\\protobuf\\src\\google\\protobuf\\descriptor.proto"
+			],
+			[
+				"descri",
+				"third-party\\protobuf\\src\\google\\protobuf\\descriptor.h"
+			],
+			[
+				"imgui_dem",
+				"third-party\\imgui\\imgui_demo.cpp"
+			],
+			[
+				"game.c",
+				"demo\\game.cpp"
+			],
+			[
+				"componentpb.h",
+				"build\\proto\\assets\\proto\\component.pb.h"
+			],
+			[
+				"descriptor.h",
+				"third-party\\protobuf\\src\\google\\protobuf\\descriptor.h"
+			],
+			[
+				"command_lin",
+				"third-party\\protobuf\\src\\google\\protobuf\\compiler\\command_line_interface.h"
+			],
+			[
+				"projected",
+				"include\\editor\\project_editor.h"
+			],
+			[
+				"command_",
+				"third-party\\protobuf\\src\\google\\protobuf\\compiler\\command_line_interface.cc"
+			],
+			[
+				"entity.fb",
+				"assets\\schema\\entity.fbs"
+			],
+			[
+				"type_resolve",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\type_resolver.h"
+			],
+			[
+				"json_uti",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\json_util.h"
+			],
+			[
+				"zero_cop",
+				"third-party\\protobuf\\src\\google\\protobuf\\io\\zero_copy_stream.h"
+			],
+			[
+				"type_resolver_util",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\type_resolver_util.h"
+			],
+			[
+				"conform",
+				"third-party\\protobuf\\conformance\\conformance_test.cc"
+			],
+			[
+				"json_form",
+				"third-party\\protobuf\\src\\google\\protobuf\\util\\json_format_proto3.proto"
+			],
+			[
+				"protobufmap",
+				"third-party\\protobuf\\src\\google\\protobuf\\map.h"
+			],
+			[
+				"object_coll",
+				"build\\proto\\assets\\proto\\object_collection.pb.h"
+			],
+			[
+				"objec",
+				"assets\\proto\\object_collection.proto"
+			],
+			[
+				"object_",
+				"build\\proto\\assets\\proto\\object_collection.pb.h"
+			],
+			[
+				"game.cp",
+				"demo\\game.cpp"
+			],
+			[
+				"libproto",
+				"third-party\\protobuf\\cmake\\libprotobuf.cmake"
+			],
+			[
+				"object.pb.cc",
+				"build\\proto\\assets\\proto\\object_collection.pb.cc"
+			],
+			[
+				"tests.cma",
+				"third-party\\protobuf\\cmake\\tests.cmake"
+			],
+			[
+				"tests.cmake",
+				"third-party\\protobuf\\cmake\\tests.cmake"
+			],
+			[
+				"tests.cmak",
+				"third-party\\protobuf\\cmake\\tests.cmake"
+			],
+			[
+				"prototest.cmak",
+				"third-party\\protobuf\\cmake\\tests.cmake"
+			],
+			[
+				"transformcompfbs",
+				"assets\\schema\\transform_component.fbs"
+			],
+			[
+				"transform_compon",
+				"include\\transform_component.h"
+			],
+			[
+				"entity_lis",
+				"assets\\schema\\entity_list.fbs"
+			],
+			[
+				"reflection.h",
+				"third-party\\flatbuffers\\include\\flatbuffers\\reflection.h"
+			],
+			[
+				"flatbuffers.h",
+				"third-party\\flatbuffers\\include\\flatbuffers\\flatbuffers.h"
+			],
+			[
+				"refle",
+				"third-party\\flatbuffers\\include\\flatbuffers\\reflection.h"
+			],
+			[
+				"idl.h",
+				"third-party\\flatbuffers\\include\\flatbuffers\\idl.h"
+			],
+			[
+				"idl",
+				"third-party\\flatbuffers\\include\\flatbuffers\\idl.h"
+			],
+			[
+				"entity_gner",
+				"build\\schema_headers\\entity_generated.h"
+			],
+			[
+				"idl_gen_text",
+				"third-party\\flatbuffers\\src\\idl_gen_text.cpp"
+			],
+			[
+				"fla",
+				"third-party\\flatbuffers\\include\\flatbuffers\\flatbuffers.h"
+			],
+			[
+				"entity_gener",
+				"build\\schema_headers\\entity_generated.h"
+			],
+			[
+				"entity",
+				"assets\\schema\\entity.fbs"
+			],
+			[
+				"dag_test_g",
+				"build\\schema_headers\\dag_test_generated.h"
+			],
+			[
+				"dag_",
+				"assets\\schema\\dag_test.fbs"
+			],
+			[
+				"sampletex",
+				"third-party\\flatbuffers\\samples\\sample_text.cpp"
+			],
+			[
+				"sampletes",
+				"third-party\\flatbuffers\\build\\VS2010\\flatsampletext.vcxproj.user"
+			],
+			[
+				"dag_test_gen",
+				"build\\schema_headers\\dag_test_generated.h"
+			],
+			[
+				"reflec",
+				"third-party\\flatbuffers\\src\\reflection.cpp"
+			],
+			[
+				"refl",
+				"third-party\\flatbuffers\\reflection\\reflection.fbs"
+			],
+			[
+				"test.cpp",
+				"third-party\\flatbuffers\\tests\\test.cpp"
+			],
+			[
+				"ent",
+				"assets\\schema\\entity.fbs"
+			],
+			[
+				"imgui.cpp",
+				"third-party\\imgui\\imgui.cpp"
+			],
+			[
+				"flathash",
+				"third-party\\flatbuffers\\src\\flathash.cpp"
+			],
+			[
+				"gamecod",
+				"demo\\game_code.h"
+			],
+			[
+				"typemat",
+				"third-party\\glm\\glm\\detail\\type_mat.hpp"
+			],
+			[
+				"type_ve",
+				"third-party\\glm\\glm\\detail\\type_vec.hpp"
+			],
+			[
+				"vec",
+				"include\\vector.h"
+			],
+			[
+				"fileul",
+				"src\\win32\\file_util.cpp"
+			],
+			[
+				"fileu",
+				"include\\file_util.h"
+			],
+			[
+				"gameco",
+				"demo\\game_code.cpp"
+			],
+			[
+				"main.cp",
+				"demo\\main.cpp"
+			],
+			[
+				"errorc",
+				"third-party\\boost\\system\\include\\boost\\system\\error_code.hpp"
+			],
+			[
+				"config.hpp",
+				"third-party\\boost\\system\\include\\boost\\system\\config.hpp"
+			],
+			[
+				"config.h",
+				"third-party\\boost\\filesystem\\include\\boost\\filesystem\\config.hpp"
+			],
+			[
+				"path.",
+				"third-party\\boost\\filesystem\\include\\boost\\filesystem\\path.hpp"
+			],
+			[
+				"path.h",
+				"include\\win32\\path.h"
+			],
+			[
+				"path.hpp",
+				"third-party\\boost\\filesystem\\include\\boost\\filesystem\\path.hpp"
+			],
+			[
+				"filesystempath.h",
+				"third-party\\boost\\filesystem\\include\\boost\\filesystem\\path.hpp"
+			],
+			[
+				"file",
+				"src\\win32\\file_util.cpp"
+			],
+			[
+				"filestat",
+				"third-party\\boost\\filesystem\\example\\file_status.cpp"
+			],
+			[
+				"operat",
+				"third-party\\boost\\filesystem\\include\\boost\\filesystem\\operations.hpp"
+			],
+			[
+				"gamecod.h",
+				"demo\\game_code.h"
+			],
+			[
+				"operations",
+				"third-party\\boost\\filesystem\\src\\operations.cpp"
+			],
+			[
+				"budd",
+				"src\\buddy_allocator.cpp"
+			],
+			[
+				"types.fb",
+				"assets\\schema\\types.fbs"
+			],
+			[
+				"stdal",
+				"include\\std_allocator.h"
+			],
+			[
+				"platfo",
+				"include\\win32\\platform_types.h"
+			],
+			[
+				"stringut",
+				"include\\string_util.h"
+			],
+			[
+				"mater",
+				"src\\material.cpp"
+			],
+			[
+				"knight",
+				"include\\knight_string.h"
+			],
+			[
+				"stringu",
+				"src\\string_util.cpp"
+			],
+			[
+				"filere",
+				"src\\win32\\file_read.cpp"
+			],
+			[
+				"plat",
+				"include\\win32\\platform_types.h"
+			],
+			[
+				"gam.",
+				"demo\\game.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 263.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
