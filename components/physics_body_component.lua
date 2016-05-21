@@ -1,4 +1,5 @@
 local class = require 'middleclass'
+local events = require 'events'
 
 local PhysicsBodyComponent = class('PhysicsBodyComponent')
 
@@ -23,6 +24,10 @@ function PhysicsBodyComponent:create(entity, bodyType)
   local x,y = unpack(self.transformComponent:position(entity.id))
   local body = love.physics.newBody(self.physicsWorld, x, y, bodyType)
   self.bodies[entity.id] = body
+
+  events.observeEntity('destroyed', entity.id, function()
+    self.bodies[entity.id] = nil
+  end)
 end
 
 function PhysicsBodyComponent:body(id)

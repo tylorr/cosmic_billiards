@@ -1,4 +1,5 @@
 local class = require 'middleclass'
+local events = require 'events'
 
 local CircleComponent = class('CircleComponent')
 
@@ -13,6 +14,10 @@ function CircleComponent:create(entity, mode, color, radius)
     color = color,
     radius = radius
   }
+
+  events.observeEntity('destroyed', entity.id, function()
+    self.circles[entity.id] = nil
+  end)
 end
 
 function CircleComponent:draw()

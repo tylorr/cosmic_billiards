@@ -1,10 +1,31 @@
 local class = require 'middleclass'
+local events = require('events')
+local triggerPhysics = require('events').triggerPhysics
 
 local ColliderComponent = class('ColliderComponent')
 
-function ColliderComponent:initialize(physicsBodyComponent)
+local function beginContact(a, b, contact)
+  triggerPhysics('collide', 'beginContact', a, b, contact)
+end
+
+local function endContact(a, b, contact)
+  triggerPhysics('collide', 'endContact', a, b, contact)
+end
+
+local function preSolve(a, b, contact)
+  triggerPhysics('collide', 'preSolve', a, b, contact)
+end
+
+local function postSolve(a, b, contact, normalimpulse, tangentimpulse)
+  triggerPhysics('collide', 'postSolve', a, b, contact, normalimpulse, tangentimpulse)
+end
+
+function ColliderComponent:initialize(world, physicsBodyComponent)
+  self.world = world
   self.physicsBodyComponent = physicsBodyComponent
   self.fixtures = {}
+
+  world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 end
 
 local function createFixture(self, entity, shape)
@@ -12,9 +33,13 @@ local function createFixture(self, entity, shape)
   assert(body, 'Collider must already have a physics body')
 
   local fixture = love.physics.newFixture(body, shape)
-  fixture:setUserData(entity.name .. ':collider')
+  fixture:setUserData(entity.id)
 
   self.fixtures[entity.id] = fixture
+
+  events.observeEntity('destroyed', entity.id, function()
+    self.fixtures[entity.id] = nil
+  end)
 end
 
 function ColliderComponent:createCircle(entity, radius)

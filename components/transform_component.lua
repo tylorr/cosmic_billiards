@@ -1,6 +1,7 @@
 local class = require 'middleclass'
 local signal = require 'signal'
 local Vector = require 'vector'
+local events = require 'events'
 
 local TransformComponent = class('TransformComponent')
 
@@ -15,6 +16,12 @@ function TransformComponent:create(entity, position, rotation)
     position = position or {0,0},
     rotation = rotation or 0
   }
+
+  -- TODO: Instead of subscriptions should be safe to 'GC' these,
+  -- see bitsquid entity system pt 2
+  events.observeEntity('destroyed', entity.id, function()
+    self.transforms[entity.id] = nil
+  end)
 end
 
 function TransformComponent:destroy(entity)

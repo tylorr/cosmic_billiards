@@ -16,6 +16,10 @@ function Vector.__sub(v1, v2)
   return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z)
 end
 
+function Vector:__unm()
+  return Vector(-self.x, -self.y, -self.z)
+end
+
 function Vector.__mul(a, b)
   if type(a) == 'number' then
     return Vector(b.x * a, b.y * a, b.z * a)
@@ -42,6 +46,10 @@ end
 
 function Vector:__tostring()
   return '(' .. self.x .. ', ' .. self.y .. ', ' .. self.z .. ')'
+end
+
+function Vector:__len()
+  return self:magnitude()
 end
 
 function Vector:xy()

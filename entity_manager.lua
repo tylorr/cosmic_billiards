@@ -1,4 +1,5 @@
 local class = require 'middleclass'
+local events = require 'events'
 
 local EntityManager = class('EntityManager')
 
@@ -7,24 +8,30 @@ function EntityManager:initialize()
   self.entities = {}
 end
 
-function EntityManager:create()
+function EntityManager:create(name)
   local id = self.nextID;
   self.nextID = self.nextID + 1
   local entity = {
     id = id,
-    active = true,
-    name = "Entity"
+    name = name or "Entity"
   }
   self.entities[id] = entity;
   return entity;
 end
 
-function EntityManager:destroy(id)
-  if type(id) == 'number' then
-    self.entities[id] = nil
+function EntityManager:get(id)
+  return self.entities[id]
+end
+
+function EntityManager:destroy(entity)
+  local id
+  if type(entity) == 'number' then
+    id = entity
   else
-    self.entities[id.id] = nil
+    id = entity.id
   end
+  self.entities[id] = nil
+  events.triggerEntity('destroyed', id)
 end
 
 function EntityManager:setName(id, name)

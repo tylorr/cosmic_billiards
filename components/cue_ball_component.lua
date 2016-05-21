@@ -1,6 +1,6 @@
 local class = require 'middleclass'
 local Vector = require 'vector'
-local beholder = require 'beholder'
+local events = require 'events'
 local bind = require('functional').bind
 
 local CueBallComponent = class('CueBallComponent')
@@ -9,14 +9,22 @@ function CueBallComponent:initialize(transformComponent, physicsBodyComponent)
   self.transformComponent = transformComponent
   self.physicsBodyComponent = physicsBodyComponent
 
-  beholder.observe('input', 'mouse', 'released', bind(self.shootFrom, self))
+  events.observeInput('mouse', 'released', bind(self.shootFrom, self))
 end
 
 function CueBallComponent:create(entity)
   self.cue = entity
+
+  events.observeEntity('destroyed', entity.id, function()
+    self.cue = nil
+  end)
 end
 
 function CueBallComponent:shootFrom(x, y)
+  if not self.cue then
+    return
+  end
+
   local mousePos = Vector(x, y)
   local cuePos = self.transformComponent:vectorPos(self.cue.id)
   local mouseToCue = cuePos - mousePos
@@ -26,3 +34,4 @@ function CueBallComponent:shootFrom(x, y)
 end
 
 return CueBallComponent
+
