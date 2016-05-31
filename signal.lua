@@ -1,4 +1,6 @@
-local Signal = {}
+local class = require 'middleclass'
+
+local Signal = class('Signal')
 
 function Signal:register(observer, method)
   table.insert(self, {
@@ -23,14 +25,8 @@ function Signal:notify(...)
   end
 end
 
--- signal metatable
-local mt = {
-  __call = function(self, ...)
-    self:notify(...)
-  end,
-  __index = Signal
-}
-
-return function()
-  return setmetatable({}, mt)
+function Signal:__call(...)
+  self:notify(...)
 end
+
+return Signal

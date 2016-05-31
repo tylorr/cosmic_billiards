@@ -7,6 +7,7 @@ local PolygonComponent = require 'components.polygon_component'
 local CueBallComponent = require 'components.cue_ball_component'
 local BallComponent = require 'components.ball_component'
 local PocketComponent = require 'components.pocket_component'
+local CameraComponent = require 'components.camera_component'
 local flatten = require('functional').flatten
 local events = require 'events'
 local co = require 'co'
@@ -21,6 +22,7 @@ local entityManager,
       cueBallComponent,
       ballComponent,
       pocketComponent,
+      cameraComponent,
       physicsWorld
 
 local function randomColor()
@@ -175,20 +177,25 @@ function love.load()
   cueBallComponent = CueBallComponent(transformComponent, physicsBodyComponent)
   pocketComponent = PocketComponent()
   ballComponent = BallComponent(entityManager, pocketComponent, colliderComponent)
+  cameraComponent = CameraComponent(transformComponent)
 
   local pocketRadius = 30
 
   createPockets(pocketRadius)
   createCushions(pocketRadius)
   createBalls()
+
+  local camera = entityManager:create()
+  transformComponent:create(camera)
+  cameraComponent:create(camera)
 end
 
 function love.mousepressed(x, y, button)
-  events.triggerInput('mouse', 'pressed', x, y, button)
+  events.triggerInput('mouse', 'pressed', button, x, y)
 end
 
 function love.mousereleased(x, y, button)
-  events.triggerInput('mouse', 'released', x, y, button)
+  events.triggerInput('mouse', 'released', button, x, y)
 end
 
 function love.update(dt)
@@ -198,6 +205,8 @@ function love.update(dt)
 end
 
 function love.draw()
+  cameraComponent:set()
   circleComponent:draw()
   polygonComponent:draw()
+  cameraComponent:unset()
 end

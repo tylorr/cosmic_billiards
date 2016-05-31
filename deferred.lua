@@ -173,16 +173,12 @@ function M.all(args)
 	if #args == 0 then
 		return d:resolve({})
 	end
-	local method = "resolve"
 	local pending = #args
 	local results = {}
 
-	local function synchronizer(i, resolved)
+	local function synchronizer(i, method)
 		return function(value)
 			results[i] = value
-			if not resolved then
-				method = "reject"
-			end
 			pending = pending - 1
 			if pending == 0 then
 				d[method](d, results)
@@ -192,7 +188,7 @@ function M.all(args)
 	end
 
 	for i = 1, pending do
-		args[i]:next(synchronizer(i, true), synchronizer(i, false))
+		args[i]:next(synchronizer(i, "resolve"), synchronizer(i, "reject"))
 	end
 	return d
 end

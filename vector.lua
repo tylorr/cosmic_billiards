@@ -52,6 +52,10 @@ function Vector:__len()
   return self:magnitude()
 end
 
+function Vector:txy()
+  return {self.x, self.y}
+end
+
 function Vector:xy()
   return self.x, self.y
 end

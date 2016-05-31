@@ -9,11 +9,11 @@ function CueBallComponent:initialize(transformComponent, physicsBodyComponent)
   self.transformComponent = transformComponent
   self.physicsBodyComponent = physicsBodyComponent
 
-  events.observeInput('mouse', 'released', bind(self.shootFrom, self))
+  events.observeInput('mouse', 'released', 1, bind(self.shootFrom, self))
 end
 
 function CueBallComponent:create(entity)
-  self.cue = entity
+  self.cue = entity.id
 
   events.observeEntity('destroyed', entity.id, function()
     self.cue = nil
@@ -26,10 +26,10 @@ function CueBallComponent:shootFrom(x, y)
   end
 
   local mousePos = Vector(x, y)
-  local cuePos = self.transformComponent:vectorPos(self.cue.id)
+  local cuePos = self.transformComponent:vectorPos(self.cue)
   local mouseToCue = cuePos - mousePos
 
-  local body = self.physicsBodyComponent:body(self.cue.id)
+  local body = self.physicsBodyComponent:body(self.cue)
   body:applyLinearImpulse(mouseToCue:xy())
 end
 

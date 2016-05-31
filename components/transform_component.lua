@@ -1,5 +1,5 @@
 local class = require 'middleclass'
-local signal = require 'signal'
+local Signal = require 'signal'
 local Vector = require 'vector'
 local events = require 'events'
 
@@ -7,8 +7,8 @@ local TransformComponent = class('TransformComponent')
 
 function TransformComponent:initialize()
   self.transforms = {}
-  self.positionUpdated = signal()
-  self.rotationUpdated = signal()
+  self.positionUpdated = Signal()
+  self.rotationUpdated = Signal()
 end
 
 function TransformComponent:create(entity, position, rotation)
