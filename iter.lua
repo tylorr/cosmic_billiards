@@ -1,6 +1,6 @@
-local M = {}
+local iter = {}
 
-local function stepIter(step)
+local function stride(step)
   return function(a, i)
     i = i + step
     local v = a[i]
@@ -10,12 +10,12 @@ local function stepIter(step)
   end
 end
 
-function M.evens(a)
-  return stepIter(2), a, 0
+function iter.evens(a)
+  return stride(2), a, 0
 end
 
-function M.odds(a)
-  return stepIter(2), a, -1
+function iter.odds(a)
+  return stride(2), a, -1
 end
 
-return M
+return iter
