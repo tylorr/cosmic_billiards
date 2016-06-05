@@ -30,21 +30,18 @@ function BallComponent:monitorPocket(ball)
 end
 
 function BallComponent:checkFallOrLeavePocket(a, b, ball, pocket)
-  local id = co.start(self.checkFall, self, ball, pocket)
-  yield(co.observe(events.physics, 'collide', 'endContact', a, b))
-  co.stop(id)
+  co.scope(co.create(self.checkFall, self, ball, pocket), function()
+    yield(co.observe(events.physics, 'collide', 'endContact', a, b))
+  end)
 end
 
 function BallComponent:checkFall(ball, pocket)
   local pocketFixture = self.colliderComponent:fixture(pocket)
   local ballBody = self.colliderComponent:body(ball)
   while true do
-
     local x, y = ballBody:getPosition()
 
-    -- print('ball pos', x, y)
     if pocketFixture:testPoint(x, y) then
-      -- print('ball fell in')
       self.entityManager:destroy(ball)
       return
     end
@@ -55,12 +52,11 @@ end
 
 function BallComponent:create(entity)
   local ball = {
-    monitorId = co.start(self.monitorPocket, self, entity.id)
+    monitorRoutine = co.start(self.monitorPocket, self, entity.id)
   }
 
   events.observeEntity('destroyed', entity.id, function()
-    -- print('Destroying ball', entity.id)
-    co.stop(ball.monitorId)
+    ball.monitorRoutine:unsubscribe()
     self.balls[entity.id] = nil
   end)
 

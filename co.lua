@@ -1,108 +1,48 @@
+local Observable = require 'observable'
 local Signal = require 'signal'
-local class = require 'middleclass'
-local events = require 'events'
-local append = require('list').append
-local pack = require('util').pack
-local unpackn = require('util').unpack
-
-local cocreate = coroutine.create
-local resume = coroutine.resume
+local beholder = require 'beholder'
 
 local co = {}
 
-local ObservingSignal = class('ObservingSignal', Signal)
-
-function ObservingSignal:initialize(...)
-  self.args = pack(...)
-end
-
-function ObservingSignal:register(observer, method)
-  self.id = events.observe(unpackn(self.args))
-  Signal.register(self, observer, method)
-end
-
-function ObservingSignal:deregister(observer, method)
-  if self.id then
-    events.stopObserving(self.id)
-    self.id = nil
-  end
-  Signal.deregister(self, observer, method)
-end
-
 function co.observe(...)
-  local observingSignal
+  local args = {...}
+  local handlerIndex = #args + 1
+  return Observable(function(observer)
+    args[handlerIndex] = function(...)
+      return observer:next(...)
+    end
 
-  local handler = function(...)
-    events.stopObserving(observingSignal.id)
-    return observingSignal(...)
-  end
-
-  observingSignal = ObservingSignal(append(handler, ...))
-  return observingSignal
+    local id = beholder.observe(unpack(args))
+    return function()
+      beholder.stopObserving(id)
+    end
+  end)
 end
 
-local SignalGroup = class('SignalGroup', Signal)
+function co.signal(signal)
+  return Observable(function(observer)
+    signal:register(observer, function(...)
+      observer:next(...)
+    end)
 
-function SignalGroup:initialize(handlerFactory, ...)
-  self.handlerFactory = handlerFactory
-  self.signals = pack(...)
+    return function() signal:deregister(observer) end
+  end)
 end
-
-function SignalGroup:register(observer, method)
-  -- print('register group', self)
-  for i = 1, self.signals.n do
-    self.signals[i]:register(self, self.handlerFactory(i))
-  end
-  Signal.register(self, observer, method)
-end
-
-function SignalGroup:deregisterChildren()
-  for i = 1, self.signals.n do
-    self.signals[i]:deregister(self)
-  end
-end
-
-function SignalGroup:deregister(observer, method)
-  self:deregisterChildren()
-  Signal.deregister(self, observer, method)
-end
-
 
 function co.all(...)
-  local pending
-  local results = {}
-
-  local signalGroup = SignalGroup(function(i)
-    return function(group, ...)
-      results[i] = {...}
-      pending = pending - 1
-
-      group.signals[i]:deregister(group)
-      if pending == 0 then
-        group(results)
-      end
-    end
-  end, ...)
-
-  pending = signalGroup.signals.n
-
-  return signalGroup
+  return Observable.zip(...)
 end
 
 function co.any(...)
-  local signalGroup = SignalGroup(function(i)
-    return function(group, ...)
-      group:deregisterChildren()
-      group(group.signals[i], ...)
-    end
-  end, ...)
-  return signalGroup
+  return Observable.of(...):flatMap(
+    function(x) return x end,
+    function(x, ...) return x, ... end)
 end
 
 function co.replace(func, ...)
-  local arg = pack(...)
+  local args = { n = select('#', ...); ... }
   return function()
-    return func(unpackn(arg))
+    return func(unpack(args, 1, args.n))
   end
 end
 
@@ -110,7 +50,7 @@ do
   local update = Signal()
 
   function co.update()
-    return update
+    return co.signal(update)
   end
 
   function co.triggerUpdate(dt)
@@ -118,44 +58,70 @@ do
   end
 end
 
-do
-  local routines = {}
+function co.create(func, ...)
+  local resume = coroutine.resume
 
-  function co.start(func, ...)
-    assert(type(func) == 'function', 'co.start first arg must be a function')
+  assert(type(func) == 'function', 'co.start first arg must be a function')
 
-    local id = {}
-    routines[id] = cocreate(func)
+  local initialArgs = { n = select('#', ...); ... }
+  local routine = coroutine.create(func)
+
+  return Observable(function(observer)
+    local subscription
 
     local function continue(...)
-      if not routines[id] then
-        return
+      -- TODO: consider pushing with observer:next(...)
+      local ok,result = resume(routine, ...)
+      if not ok then
+        return observer:error('Failed to resume coroutine\n' .. tostring(result))
       end
 
-      local ok,result = resume(routines[id], ...)
-      assert(ok, 'Failed to resume coroutine')
+      if observer.closed then return end
 
-      if type(result) == 'table' and result.register then
-        local s = result
-        return s:register(id, function(_, ...)
-          s:deregister(id)
-          return continue(...)
-        end)
+      if type(result) == 'table' and result.subscribe then
+        -- TODO: consider pushing with observer:next(result)
+        return result:subscribe({
+          start = function(_, s)
+            subscription = s
+          end,
+          next = function(_, ...)
+            subscription:unsubscribe()
+            if observer.closed then return end
+            return continue(...)
+          end
+        })
       elseif type(result) == 'function' then
-        routines[id] = cocreate(result)
+        -- Allow coroutine to return and exit any co.scope
+        resume(routine)
+        routine = coroutine.create(result)
         return continue()
       end
 
-      routines[id] = nil
+      return observer:complete()
     end
 
-    continue(...)
+    continue(unpack(initialArgs, 1, initialArgs.n))
 
-    return id
-  end
+    return function()
+      routine = nil
+      if subscription then
+        subscription:unsubscribe()
+      end
+    end
+  end)
+end
 
-  function co.stop(id)
-    routines[id] = nil
+function co.start(func, ...)
+  return co.create(func, ...):subscribe({})
+end
+
+function co.scope(subroutine, func)
+  local subscription = subroutine:subscribe({})
+  local status, err = pcall(func)
+  subscription:unsubscribe()
+
+  if not status then
+    error(err)
   end
 end
 
