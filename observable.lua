@@ -357,6 +357,48 @@ function Observable.zip(...)
   end)
 end
 
+function Observable.merge(...)
+  local observables = {...}
+
+  -- Allow passing array of observables
+  if observables[1] and observables[1][1] then
+    observables = observables[1]
+  end
+
+  assert(#observables > 0, 'Too few observables passed to merge')
+
+  return Observable.new(function(observer)
+    local done = {}
+    for i=1, #observables do
+      done[i] = false
+    end
+
+    local subscriptions = {}
+    for i=1, #observables do
+      subscriptions[i] = observables[i]:subscribe({
+        next = function(_, ...)
+          observer:next(...)
+        end,
+        error = function(_, err)
+          observer:error(err)
+        end,
+        complete = function()
+          done[i] = true
+          if every(done, identity) then
+            observer:complete()
+          end
+        end
+      })
+    end
+
+    return function()
+      for _,subscription in ipairs(subscriptions) do
+        subscription:unsubscribe()
+      end
+    end
+  end)
+end
+
 setmetatable(Observable, {
   __call = function(_, ...) return Observable.new(...) end
 })
