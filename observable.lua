@@ -210,6 +210,172 @@ function Observable:subscribe(observer, ...)
   return Subscription.new(observer, self._subscriber)
 end
 
+function Observable:map(func)
+  assert(type(func) == 'function', tostring(func) .. ' is not a function')
+
+  return Observable.new(function(observer)
+    self:subscribe({
+      next = function(_, ...)
+        if observer.closed then return end
+
+        local function checkStatus(status, ...)
+          if not status then
+            return observer:error((...))
+          end
+          return observer:next(...)
+        end
+
+        return checkStatus(pcall(function(...)
+          return func(...)
+        end, ...))
+      end,
+      error = function(_, err) return observer:error(err) end,
+      complete = function(_, ...) return observer:complete(...) end
+    })
+  end)
+end
+
+function Observable:flatMap(selector, resultSelector)
+  assert(type(selector) == 'function', tostring(selector) .. 'is not a function')
+
+  if resultSelector then
+    assert(type(resultSelector) == 'function', tostring(resultSelector) .. 'is not a function')
+  end
+
+  return Observable.new(function(observer)
+    local completed = false
+    local subscriptions = {}
+
+    local function closeIfDone()
+      if completed and #subscriptions <= 0 then
+        observer:complete()
+      end
+    end
+
+    local outerSubscription = self:subscribe({
+      next = function(_, outerValue, ...)
+        local function observeInner(...)
+          Observable.from(...):subscribe({
+            start = function(innerObserver, s)
+              innerObserver._subscription = s
+              subscriptions[#subscriptions + 1] = s
+            end,
+
+            next = function(_, ...)
+              if resultSelector then
+                local function checkStatus(status, ...)
+                  if not status then
+                    return observer:error((...))
+                  end
+                  observer:next(...)
+                end
+
+                checkStatus(pcall(function(...)
+                  return resultSelector(outerValue, ...)
+                end, ...))
+              else
+                observer:next(...)
+              end
+            end,
+
+            error = function(_, err) observer:error(err) end,
+
+            complete = function(innerObserver)
+              subscriptions = filter(subscriptions, function(x) return x ~= innerObserver._subscription end)
+              closeIfDone()
+            end
+          })
+        end
+
+        local function checkStatus(status, ...)
+          if not status then
+            return observer:error((...))
+          end
+          observeInner(...)
+        end
+
+        checkStatus(pcall(function(...)
+          return selector(...)
+        end, outerValue, ...))
+      end,
+
+      error = function(_, err) return observer:error(err) end,
+
+      complete = function()
+        completed = true
+        closeIfDone()
+      end
+    })
+
+    return function()
+      for _, subscription in ipairs(subscriptions) do
+        subscription:unsubscribe()
+        outerSubscription:unsubscribe()
+      end
+    end
+  end)
+end
+
+function Observable:switch()
+  return Observable.new(function(observer)
+    local innerSubscription
+    local latest = 0
+    local hasLatest = false
+    local stopped = false
+    local outerSubscription = self:subscribe({
+      next = function(_, innerSource)
+        -- print('innerSource', inspect(innerSource))
+        latest = latest + 1
+        local id = latest
+        hasLatest = true
+
+        if innerSubscription then
+          innerSubscription:unsubscribe()
+        end
+
+        innerSubscription = innerSource:subscribe({
+          next = function(_, ...)
+            if latest == id then
+              observer:next(...)
+            end
+          end,
+          error = function(_, err)
+            if latest == id then
+              observer:error(err)
+            end
+          end,
+          complete = function()
+            if latest == id then
+              hasLatest = false
+              if stopped then
+                observer:complete()
+              end
+            end
+          end
+        })
+      end,
+
+      error = function(_, err)
+        observer:error(err)
+      end,
+
+      complete = function()
+        stopped = true
+        if not hasLatest then
+          observer:complete()
+        end
+      end
+    })
+
+    return function()
+      outerSubscription:unsubscribe()
+      if innerSubscription then
+        innerSubscription:unsubscribe()
+      end
+    end
+  end)
+end
+
 -- Public static api
 
 function Observable.from(x, state, initial)
