@@ -1,3 +1,7 @@
+local every = require('functional').every
+local map = require('functional').map
+local filter = require('functional').filter
+
 local Observable = {
   _VERSION = 'observable v1.0.0',
   _DESCRIPTION = [[
@@ -64,14 +68,13 @@ function SubscriptionObserver:next(...)
   local function checkStatus(status, ...)
     if not status then
       pcall(function() subscription.unsubscribe() end)
-      error(...)
+      error((...))
     end
     return ...
   end
 
   return checkStatus(pcall(function(...)
-    if not observer.next then return end
-    return observer:next(...)
+    return observer.next and observer:next(...)
   end, ...))
 end
 
@@ -93,8 +96,7 @@ function SubscriptionObserver:error(value)
   end
 
   return checkStatus(pcall(function()
-    if not observer.error then error(value) end
-    return observer:error(value)
+    return observer.error and observer:error(value) or error(value)
   end))
 end
 
@@ -108,7 +110,7 @@ function SubscriptionObserver:complete(...)
   local function checkStatus(status, ...)
     if not status then
       pcall(function() cleanupSubscription(subscription) end)
-      error(...)
+      error((...))
     end
 
     cleanupSubscription(subscription)
@@ -165,8 +167,7 @@ function Subscription.new(observer, subscriber)
   end)
 
   if not status then
-    observer:error(err)
-    return
+    return observer:error(err)
   end
 
   if subscriptionClosed(self) then
@@ -198,15 +199,12 @@ function Observable:subscribe(observer, ...)
       complete = select(2, ...)
     }
   end
-
   return Subscription.new(observer, self._subscriber)
 end
 
 -- Public static api
 
 function Observable.from(x, state, initial)
-  assert(x ~= nil, tostring(x) .. ' is not an object')
-
   if type(x) == 'function' then
     local iterator = x
     return Observable.new(function(observer)
@@ -260,6 +258,102 @@ function Observable.of(...)
     end
 
     observer:complete()
+  end)
+end
+
+local ZipObserver = {}
+local ZipObserverMt = { __index = ZipObserver }
+
+local function notEmpty(x) return #x > 0 end
+local function popFirst(x) return table.remove(x, 1) end
+local function identity(x) return x end
+local function notTheSame(i)
+  return function(_, j)
+    return j ~= i
+  end
+end
+
+function ZipObserver.new(observer, i, selector, queue, done)
+  return setmetatable({
+    _observer = observer,
+    _i = i,
+    _selector = selector,
+    _queue = queue,
+    _done = done
+  }, ZipObserverMt)
+end
+
+function ZipObserver:next(x)
+  do
+    local q = self._queue[self._i]
+    q[#q + 1] = x
+  end
+  if every(self._queue, notEmpty) then
+    local function checkStatus(status, ...)
+      if not status then
+        return self._observer:error((...))
+      end
+      return self._observer:next(...)
+    end
+
+    local values = map(self._queue, popFirst)
+    checkStatus(pcall(function(...)
+      return self._selector(...)
+    end, unpack(values)))
+
+  elseif every(filter(self._done, notTheSame(self._i)), identity) then
+    self._observer:complete()
+  end
+end
+
+function ZipObserver:error(err)
+  self._observer:error(err)
+end
+
+function ZipObserver:complete()
+  self._done[self._i] = true
+  if every(self._done, identity) then
+    self._observer:complete()
+  end
+end
+
+function Observable.zip(...)
+  local observables = {...}
+  local selector
+
+  if type(observables[#observables]) == 'function' then
+    selector = observables[#observables]
+    observables[#observables] = nil
+  else
+    selector = function(...) return {...} end
+  end
+
+  -- Allow passing array of observables
+  if observables[1] and observables[1][1] then
+    observables = observables[1]
+  end
+
+  assert(#observables > 0, 'Too few observables passed to zip')
+
+  return Observable.new(function(observer)
+    local queue = {}
+    local done = {}
+    for i=1, #observables do
+      queue[i] = {}
+      done[i] = false
+    end
+
+    local subscriptions = {}
+    for i=1, #observables do
+      subscriptions[i] = observables[i]:subscribe(
+        ZipObserver.new(observer, i, selector, queue, done))
+    end
+
+    return function()
+      for _,subscription in ipairs(subscriptions) do
+        subscription:unsubscribe()
+      end
+    end
   end)
 end
 
