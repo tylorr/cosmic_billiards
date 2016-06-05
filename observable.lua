@@ -183,7 +183,15 @@ function Subscription:unsubscribe()
   cleanupSubscription(self)
 end
 
-local ObservableMt = { __index = Observable }
+local ObservableMt = {}
+
+function ObservableMt:__index(key)
+  if key == Observable then
+    return function() return self end
+  else
+    return Observable[key]
+  end
+end
 
 function Observable.new(subscriber)
   return setmetatable({ 
@@ -205,6 +213,19 @@ end
 -- Public static api
 
 function Observable.from(x, state, initial)
+  local method = x[Observable]
+  if method then
+    local observable = method(x)
+
+    assert(type(observable) == 'table', tostring(observable) .. ' is not a table')
+
+    if observable.new == Observable.new then
+      return observable
+    end
+
+    return Observable.new(function(observer) observable:subscribe(observer) end)
+  end
+
   if type(x) == 'function' then
     local iterator = x
     return Observable.new(function(observer)
