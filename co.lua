@@ -1,33 +1,6 @@
-local Observable = require 'observable'
-local Signal = require 'signal'
-local beholder = require 'beholder'
+local Observable = require 'observable_linq'
 
 local co = {}
-
-function co.observe(...)
-  local args = {...}
-  local handlerIndex = #args + 1
-  return Observable(function(observer)
-    args[handlerIndex] = function(...)
-      return observer:next(...)
-    end
-
-    local id = beholder.observe(unpack(args))
-    return function()
-      beholder.stopObserving(id)
-    end
-  end)
-end
-
-function co.signal(signal)
-  return Observable(function(observer)
-    signal:register(observer, function(...)
-      observer:next(...)
-    end)
-
-    return function() signal:deregister(observer) end
-  end)
-end
 
 function co.all(...)
   return Observable.zip(...)
@@ -43,18 +16,6 @@ function co.replace(func, ...)
   local args = { n = select('#', ...); ... }
   return function()
     return func(unpack(args, 1, args.n))
-  end
-end
-
-do
-  local update = Signal()
-
-  function co.update()
-    return co.signal(update)
-  end
-
-  function co.triggerUpdate(dt)
-    update(dt)
   end
 end
 

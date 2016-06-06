@@ -1,6 +1,6 @@
 local class = require 'middleclass'
 local events = require 'events'
-local co = require 'co'
+local co = require 'co_bridge'
 local Vector = require 'vector'
 
 local yield = coroutine.yield
