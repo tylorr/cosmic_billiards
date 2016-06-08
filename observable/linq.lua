@@ -1,8 +1,30 @@
-local every = require('functional').every
-local map = require('functional').map
-local filter = require('functional').filter
+local current_folder = (...):gsub('%.[^%.]+$', '')
+local Observable = require(current_folder .. '.observable')
 
-local Observable = require 'observable'
+local function map(tbl, func)
+  local result = {}
+  for k,v in pairs(tbl) do
+    result[k] = func(v, k, tbl)
+  end
+  return result
+end
+
+ local function filter(tbl, func)
+  local result = {}
+  for k,v in pairs(tbl) do
+    if func(v, k) then
+      result[k] = v
+    end
+  end
+  return result
+ end
+
+local function every(tbl, fn)
+  for _,value in pairs(tbl) do
+    if not fn(value) then return false end
+  end
+  return true
+end
 
 function Observable:map(func)
   assert(type(func) == 'function', tostring(func) .. ' is not a function')
@@ -310,4 +332,4 @@ function Observable.merge(...)
   end)
 end
 
-return Observable
+-- return Observable

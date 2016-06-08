@@ -1,4 +1,4 @@
-local Observable = require 'observable_linq'
+local Observable = require 'observable'
 
 local co = {}
 
