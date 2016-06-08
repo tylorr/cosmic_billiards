@@ -21,17 +21,19 @@ end
 
 function co.create(func, ...)
   local resume = coroutine.resume
+  local cocreate = coroutine.create
 
   assert(type(func) == 'function', 'co.start first arg must be a function')
 
   local initialArgs = { n = select('#', ...); ... }
-  local routine = coroutine.create(func)
+  local routine = cocreate(func)
 
   return Observable(function(observer)
     local subscription
 
-    local function continue(...)
-      -- TODO: consider pushing with observer:next(...)
+    local function step(...)
+      if observer.closed then return end
+
       local ok,result = resume(routine, ...)
       if not ok then
         return observer:error('Failed to resume coroutine\n' .. tostring(result))
@@ -40,28 +42,38 @@ function co.create(func, ...)
       if observer.closed then return end
 
       if type(result) == 'table' and result.subscribe then
-        -- TODO: consider pushing with observer:next(result)
+        observer:next('yield.observable', result)
+
+        local function unsubscribeStep(_, ...)
+          observer:next('yield.complete', ...)
+          subscription:unsubscribe()
+          return step(...)
+        end
+
         return result:subscribe({
-          start = function(_, s)
-            subscription = s
-          end,
-          next = function(_, ...)
-            subscription:unsubscribe()
-            if observer.closed then return end
-            return continue(...)
-          end
+          start = function(_, s) subscription = s end,
+          next = unsubscribeStep,
+          error = function(_, err) return observer:error(err) end,
+          complete = unsubscribeStep,
         })
       elseif type(result) == 'function' then
+        observer:next('yield.function', result)
+
         -- Allow coroutine to return and exit any co.scope
         resume(routine)
-        routine = coroutine.create(result)
-        return continue()
+
+        if observer.closed then return end
+
+        routine = cocreate(result)
+        return step()
+      elseif result ~= nil then
+        return observer:error('Yield on unrecognized value: ' .. tostring(result))
       end
 
       return observer:complete()
     end
 
-    continue(unpack(initialArgs, 1, initialArgs.n))
+    step(unpack(initialArgs, 1, initialArgs.n))
 
     return function()
       routine = nil
