@@ -12,6 +12,15 @@ function co.any(...)
     function(x, ...) return x, ... end)
 end
 
+function co.map(map)
+  return Observable.from(pairs(map)):flatMap(
+    function(x) return x end,
+    function(x, ...)
+      assert(type(map[x]) == 'function', 'co.map requires table of functions')
+      return map[x](x, ...)
+    end)
+end
+
 function co.replace(func, ...)
   local args = { n = select('#', ...); ... }
   return function()
