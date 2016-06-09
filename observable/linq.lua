@@ -192,6 +192,20 @@ function Observable:switch()
   end)
 end
 
+function Observable:takeUntil(other)
+  return Observable.new(function(observer)
+    self:subscribe(observer)
+    other:subscribe({
+      next = function()
+        observer:complete()
+      end,
+      error = function(_, err)
+        observer:error(err)
+      end
+    })
+  end)
+end
+
 -- static api
 
 local ZipObserver = {}
