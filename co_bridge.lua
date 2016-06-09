@@ -29,13 +29,18 @@ function co.signal(signal)
 end
 
 local update = Signal()
+local updateObservable = co.signal(update)
 
 function co.update()
-  return co.signal(update)
+  return updateObservable
 end
 
 function co.triggerUpdate(dt)
   update(dt)
+end
+
+function co.updateUntil(other)
+  return updateObservable:takeUntil(other)
 end
 
 return co

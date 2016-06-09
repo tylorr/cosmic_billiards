@@ -26,29 +26,20 @@ end
 
 function CameraComponent:monitorDrag()
   local pressed = co.observe(events.input, 'mouse', 'pressed', 2)
-  local released = co.observe(events.input, 'mouse', 'released', 2)
-  local update = co.update()
-  local updateOrRelease = co.any(released, update)
+  local updateUntilRelease = co.updateUntil(co.observe(events.input, 'mouse', 'released', 2))
 
   local transform = self.transformComponent
-  local cases, mousePos, pos, diff
+  local pos, diff
+  local mousePos = Vector:allocate()
   while true do
-    mousePos = Vector(yield(pressed))
+    mousePos:initialize(yield(pressed))
     pos = transform:vectorPos(self.camera)
     diff = mousePos - pos
 
-    while true do
-      cases = cases or {
-        [released] = function() return false end,
-        [update] = function()
-          mousePos = Vector(love.mouse.getPosition())
-          pos = mousePos - diff
-          transform:setPosition(self.camera, pos:txy())
-          return true
-        end
-      }
-
-      if not switch(cases, yield(updateOrRelease)) then break end
+    while yield(updateUntilRelease) do
+      mousePos:initialize(love.mouse.getPosition())
+      pos = mousePos - diff
+      transform:setPosition(self.camera, pos:txy())
     end
   end
 end
