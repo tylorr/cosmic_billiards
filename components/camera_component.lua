@@ -3,8 +3,6 @@ local events = require 'events'
 local co = require 'co_bridge'
 local Vector = require 'vector'
 
-local yield = coroutine.yield
-
 local CameraComponent = class('CameraComponent')
 
 function CameraComponent:initialize(transformComponent)
@@ -16,29 +14,18 @@ function CameraComponent:create(entity)
   co.start(self.monitorDrag, self)
 end
 
-local function switch(cases, casevar, ...)
-  local func = cases[casevar] or cases.default
-  if func then
-    assert(type(func) == 'function', 'caseof only excepts table of functions')
-    return func(casevar, ...)
-  end
-end
-
 function CameraComponent:monitorDrag()
-  local pressed = co.observe(events.input, 'mouse', 'pressed', 2)
-  local updateUntilRelease = co.updateUntil(co.observe(events.input, 'mouse', 'released', 2))
-
+  local yield = coroutine.yield
   local transform = self.transformComponent
-  local pos, diff
-  local mousePos = Vector:allocate()
+  
+  local pressed = co.observe(events.input, 'mouse', 'pressed', 2)
+  local updateUntilReleased = co.updateUntil(co.observe(events.input, 'mouse', 'released', 2))
   while true do
-    mousePos:initialize(yield(pressed))
-    pos = transform:vectorPos(self.camera)
-    diff = mousePos - pos
+    local startMousePos = Vector(yield(pressed))
+    local startPos = transform:vectorPos(self.camera)
 
-    while yield(updateUntilRelease) do
-      mousePos:initialize(love.mouse.getPosition())
-      pos = mousePos - diff
+    while yield(updateUntilReleased) do
+      local pos = startPos - (Vector(love.mouse.getPosition()) - startMousePos)
       transform:setPosition(self.camera, pos:txy())
     end
   end
@@ -51,7 +38,7 @@ function CameraComponent:set()
   love.graphics.translate(-x, -y)
 end
 
-function CameraComponent:unset()
+function CameraComponent.unset()
   love.graphics.pop()
 end
 
