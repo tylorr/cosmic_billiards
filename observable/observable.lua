@@ -63,7 +63,7 @@ function SubscriptionObserver:next(...)
 
   local function checkStatus(status, ...)
     if not status then
-      pcall(function() subscription.unsubscribe() end)
+      pcall(function() subscription:unsubscribe() end)
       error((...))
     end
     return ...
@@ -130,7 +130,7 @@ function SubscriptionMt:__index(key)
 end
 
 local function cleanupFromSubscription(subscription)
-  return function() subscription.unsubscribe() end
+  return function() subscription:unsubscribe() end
 end
 
 function Subscription.new(observer, subscriber)
