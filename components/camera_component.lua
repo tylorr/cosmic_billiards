@@ -1,6 +1,6 @@
 local class = require 'middleclass'
 local events = require 'events'
-local co = require 'co_bridge'
+local co = require 'coex'
 local Vector = require 'vector'
 
 local CameraComponent = class('CameraComponent')
