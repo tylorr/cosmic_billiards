@@ -14,39 +14,28 @@ function BallComponent:initialize(entityManager, pocketComponent, colliderCompon
 end
 
 function BallComponent:monitorPocket(ball)
-  local a,b
-  while true do
-    a, b = yield(co.observe(events.physics, 'collide', 'beginContact'))
+  local fixture = self.colliderComponent:fixture(ball)
 
-    local aId = a:getUserData()
-    local bId = b:getUserData()
+  local pocketCollision = 
+    co.observe(events.physics, 'collide', 'beginContact', fixture)
+      :filter(function(otherFixture)
+        local otherId = otherFixture:getUserData()
+        return self.pocketComponent:has(otherId)
+      end)
 
-    if (aId == ball and self.pocketComponent:is(bId)) then
-      self:checkFallOrLeavePocket(a, b, ball, bId)
-    elseif bId == ball and self.pocketComponent:is(aId) then
-      self:checkFallOrLeavePocket(a, b, ball, aId)
-    end
+  for pocketFixture in yield, pocketCollision do
+    co.scope(co.create(self.checkFall, self, ball, pocketFixture), function()
+      yield(co.observe(events.physics, 'collide', 'endContact', fixture, pocketFixture))
+    end)
   end
 end
 
-function BallComponent:checkFallOrLeavePocket(a, b, ball, pocket)
-  co.scope(co.create(self.checkFall, self, ball, pocket), function()
-    yield(co.observe(events.physics, 'collide', 'endContact', a, b))
-  end)
-end
-
-function BallComponent:checkFall(ball, pocket)
-  local pocketFixture = self.colliderComponent:fixture(pocket)
+function BallComponent:checkFall(ball, pocketFixture)
   local ballBody = self.colliderComponent:body(ball)
-  while true do
-    local x, y = ballBody:getPosition()
-
-    if pocketFixture:testPoint(x, y) then
-      self.entityManager:destroy(ball)
-      return
+  while yield(co.update()) do
+    if pocketFixture:testPoint(ballBody:getPosition()) then
+      return self.entityManager:destroy(ball)
     end
-
-    yield(co.update())
   end
 end
 

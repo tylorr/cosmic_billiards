@@ -10,7 +10,7 @@ function PocketCompnent:create(entity)
   self.pockets[entity.id] = true
 end
 
-function PocketCompnent:is(id)
+function PocketCompnent:has(id)
   return self.pockets[id]
 end
 
