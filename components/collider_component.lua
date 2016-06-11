@@ -6,18 +6,22 @@ local ColliderComponent = class('ColliderComponent')
 
 local function beginContact(a, b, contact)
   triggerPhysics('collide', 'beginContact', a, b, contact)
+  triggerPhysics('collide', 'beginContact', b, a, contact)
 end
 
 local function endContact(a, b, contact)
   triggerPhysics('collide', 'endContact', a, b, contact)
+  triggerPhysics('collide', 'endContact', b, a, contact)
 end
 
 local function preSolve(a, b, contact)
   triggerPhysics('collide', 'preSolve', a, b, contact)
+  triggerPhysics('collide', 'preSolve', b, a, contact)
 end
 
 local function postSolve(a, b, contact, normalimpulse, tangentimpulse)
   triggerPhysics('collide', 'postSolve', a, b, contact, normalimpulse, tangentimpulse)
+  triggerPhysics('collide', 'postSolve', b, a, contact, normalimpulse, tangentimpulse)
 end
 
 function ColliderComponent:initialize(world, physicsBodyComponent)
