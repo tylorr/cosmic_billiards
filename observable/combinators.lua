@@ -51,6 +51,31 @@ function Observable:map(func)
   end)
 end
 
+function Observable:filter(func)
+  assert(type(func) == 'function', tostring(func) .. ' is not a function')
+
+  return Observable.new(function(observer)
+    self:subscribe({
+      next = function(_, ...)
+        if observer.closed then
+          return
+        end
+
+        local status, result = pcall(func, ...)
+        if not status then
+          return observer:error(result)
+        end
+
+        if result then
+          return observer:next(...)
+        end
+      end,
+      error = function(_, err)  return observer:error(err) end,
+      complete = function() return observer:complete() end
+    })
+  end)
+end
+
 function Observable:flatMap(selector, resultSelector)
   assert(type(selector) == 'function', tostring(selector) .. 'is not a function')
 
@@ -140,7 +165,6 @@ function Observable:switch()
     local stopped = false
     local outerSubscription = self:subscribe({
       next = function(_, innerSource)
-        -- print('innerSource', inspect(innerSource))
         latest = latest + 1
         local id = latest
         hasLatest = true
