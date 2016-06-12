@@ -1,11 +1,12 @@
 local class = require 'middleclass'
 local events = require 'events'
-local co = require 'coex'
+local co = require 'co'
 local Vector = require 'vector'
 
 local CameraComponent = class('CameraComponent')
 
-function CameraComponent:initialize(transformComponent)
+function CameraComponent:initialize(behaviourComponent, transformComponent)
+  self.behaviourComponent = behaviourComponent
   self.transformComponent = transformComponent
 end
 
@@ -16,14 +17,14 @@ end
 
 function CameraComponent:monitorDrag()
   local yield = coroutine.yield
+  local behaviour = self.behaviourComponent
   local transform = self.transformComponent
   
-  local pressed = co.observe(events.input, 'mouse', 'pressed', 2)
-  local updateUntilReleased = co.updateUntil(co.observe(events.input, 'mouse', 'released', 2))
-  while true do
-    local startMousePos = Vector(yield(pressed))
+  for mx,my in yield, co.observe(events.input, 'mouse', 'pressed', 2) do
+    local startMousePos = Vector(mx, my)
     local startPos = transform:vectorPos(self.camera)
 
+    local updateUntilReleased = behaviour:updateUntil(co.observe(events.input, 'mouse', 'released', 2))
     while yield(updateUntilReleased) do
       local pos = startPos - (Vector(love.mouse.getPosition()) - startMousePos)
       transform:setPosition(self.camera, pos:txy())

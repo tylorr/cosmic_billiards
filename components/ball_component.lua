@@ -1,13 +1,14 @@
 local class = require 'middleclass'
-local co = require 'coex'
+local co = require 'co'
 local events = require 'events'
 
 local yield = coroutine.yield
 
 local BallComponent = class('BallComponent')
 
-function BallComponent:initialize(entityManager, pocketComponent, colliderComponent)
+function BallComponent:initialize(entityManager, behaviourComponent, pocketComponent, colliderComponent)
   self.entityManager = entityManager
+  self.behaviourComponent = behaviourComponent
   self.pocketComponent = pocketComponent
   self.colliderComponent = colliderComponent
   self.balls = {}
@@ -24,15 +25,16 @@ function BallComponent:monitorPocket(ball)
       end)
 
   for pocketFixture in yield, pocketCollision do
-    co.scope(co.create(self.checkFall, self, ball, pocketFixture), function()
-      yield(co.observe(events.physics, 'collide', 'endContact', fixture, pocketFixture))
-    end)
+    co.runUntil(
+      co.create(self.checkFall, self, ball, pocketFixture), 
+      co.observe(events.physics, 'collide', 'endContact', fixture, pocketFixture))
   end
 end
 
 function BallComponent:checkFall(ball, pocketFixture)
+  local behaviour = self.behaviourComponent
   local ballBody = self.colliderComponent:body(ball)
-  while yield(co.update()) do
+  while yield(behaviour:waitForUpdate()) do
     if pocketFixture:testPoint(ballBody:getPosition()) then
       return self.entityManager:destroy(ball)
     end
@@ -40,16 +42,7 @@ function BallComponent:checkFall(ball, pocketFixture)
 end
 
 function BallComponent:create(entity)
-  local ball = {
-    monitorRoutine = co.start(self.monitorPocket, self, entity.id)
-  }
-
-  events.observeEntity('destroyed', entity.id, function()
-    ball.monitorRoutine:unsubscribe()
-    self.balls[entity.id] = nil
-  end)
-
-  self.balls[entity.id] = ball
+  self.balls[entity.id] = self.behaviourComponent:start(entity.id, self.monitorPocket, self)
 end
 
 return BallComponent

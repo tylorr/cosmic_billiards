@@ -1,4 +1,5 @@
 local EntityManager = require 'entity_manager'
+local BehaviourComponent = require 'components.behaviour_component'
 local TransformComponent = require 'components.transform_component'
 local PhysicsBodyComponent = require 'components.physics_body_component'
 local ColliderComponent = require 'components.collider_component'
@@ -10,10 +11,12 @@ local PocketComponent = require 'components.pocket_component'
 local CameraComponent = require 'components.camera_component'
 local flatten = require('functional').flatten
 local events = require 'events'
-local co = require 'co'
 -- local inspect = require 'inspect'
 
+require 'coex'
+
 local entityManager,
+      behaviourComponent,
       transformComponent,
       physicsBodyComponent,
       colliderComponent,
@@ -169,6 +172,7 @@ function love.load()
   physicsWorld = love.physics.newWorld(0, 0, false)
 
   entityManager = EntityManager()
+  behaviourComponent = BehaviourComponent()
   transformComponent = TransformComponent()
   physicsBodyComponent = PhysicsBodyComponent(physicsWorld, transformComponent)
   colliderComponent = ColliderComponent(physicsWorld, physicsBodyComponent)
@@ -176,8 +180,8 @@ function love.load()
   polygonComponent = PolygonComponent(transformComponent)
   cueBallComponent = CueBallComponent(transformComponent, physicsBodyComponent)
   pocketComponent = PocketComponent()
-  ballComponent = BallComponent(entityManager, pocketComponent, colliderComponent)
-  cameraComponent = CameraComponent(transformComponent)
+  ballComponent = BallComponent(entityManager, behaviourComponent, pocketComponent, colliderComponent)
+  cameraComponent = CameraComponent(behaviourComponent, transformComponent)
 
   local pocketRadius = 30
 
@@ -199,8 +203,8 @@ function love.mousereleased(x, y, button)
 end
 
 function love.update(dt)
-  co.triggerUpdate(dt)
   physicsWorld:update(dt)
+  behaviourComponent:update(dt)
   physicsBodyComponent:updateTransforms()
 end
 
