@@ -98,13 +98,13 @@ function co.start(func, ...)
 end
 
 function co.scope(subroutine, func)
-  local subscription = subroutine:subscribe({})
-  local status, err = pcall(func)
-  subscription:unsubscribe()
+  co.runUntil(subroutine, co.create(func))
+end
 
-  if not status then
-    error(err)
-  end
+function co.runUntil(subroutine, observable)
+  return subroutine
+    :takeUntil(observable)
+    :subscribe({})
 end
 
 return co
