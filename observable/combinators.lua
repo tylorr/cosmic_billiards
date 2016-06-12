@@ -30,7 +30,7 @@ function Observable:map(func)
   assert(type(func) == 'function', tostring(func) .. ' is not a function')
 
   return Observable.new(function(observer)
-    self:subscribe({
+    return self:subscribe({
       next = function(_, ...)
         if observer.closed then return end
 
@@ -55,7 +55,7 @@ function Observable:filter(func)
   assert(type(func) == 'function', tostring(func) .. ' is not a function')
 
   return Observable.new(function(observer)
-    self:subscribe({
+    return self:subscribe({
       next = function(_, ...)
         if observer.closed then
           return
@@ -218,8 +218,8 @@ end
 
 function Observable:takeUntil(other)
   return Observable.new(function(observer)
-    self:subscribe(observer)
-    other:subscribe({
+    local sourceSub = self:subscribe(observer)
+    local otherSub = other:subscribe({
       next = function()
         observer:complete()
       end,
@@ -227,6 +227,11 @@ function Observable:takeUntil(other)
         observer:error(err)
       end
     })
+
+    return function()
+      sourceSub:unsubscribe()
+      otherSub:unsubscribe()
+    end
   end)
 end
 
