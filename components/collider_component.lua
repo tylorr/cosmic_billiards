@@ -39,7 +39,9 @@ local function createFixture(self, entity, shape)
   local fixture = love.physics.newFixture(body, shape)
   fixture:setUserData(entity.id)
 
-  self.fixtures[entity.id] = fixture
+  local fixtures = self.fixtures[entity.id] or {}
+  fixtures[#fixtures + 1] = fixture
+  self.fixtures[entity.id] = fixtures
 
   events.observeEntity('destroyed', entity.id, function()
     self.fixtures[entity.id] = nil
@@ -57,14 +59,18 @@ function ColliderComponent:createPolygon(entity, ...)
 end
 
 function ColliderComponent:shape(id)
-  return self.fixtures[id] and self.fixtures[id]:getShape()
+  return self.fixtures[id] and self.fixtures[id][1]:getShape()
 end
 
 function ColliderComponent:body(id)
-  return self.fixtures[id] and self.fixtures[id]:getBody()
+  return self.fixtures[id] and self.fixtures[id][1]:getBody()
 end
 
 function ColliderComponent:fixture(id)
+  return self.fixtures[id] and self.fixtures[id][1]
+end
+
+function ColliderComponent:fixtures(id)
   return self.fixtures[id]
 end
 
