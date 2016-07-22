@@ -51,10 +51,8 @@ function co.create(func, ...)
       if observer.closed then return end
 
       if type(result) == 'table' and result.subscribe then
-        observer:next('yield.observable', result)
 
         local function unsubscribeStep(_, ...)
-          observer:next('yield.complete', ...)
           subscription:unsubscribe()
           return step(...)
         end
@@ -66,7 +64,6 @@ function co.create(func, ...)
           complete = unsubscribeStep,
         })
       elseif type(result) == 'function' then
-        observer:next('yield.function', result)
 
         -- Allow coroutine to return and exit any co.scope
         resume(routine)

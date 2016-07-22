@@ -30,4 +30,12 @@ function BehaviourComponent:start(entityId, func, target, ...)
     :subscribe({})
 end
 
+-- luacheck: no self
+function BehaviourComponent:runUntil(entityId, subroutine, condition)
+  return subroutine
+    :takeUntil(condition)
+    :takeUntil(co.observe(events.entity, 'destroyed', entityId))
+    :subscribe({})
+end
+
 return BehaviourComponent

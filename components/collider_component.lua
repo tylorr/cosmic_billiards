@@ -32,6 +32,24 @@ function ColliderComponent:initialize(world, physicsBodyComponent)
   world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 end
 
+function ColliderComponent:debugDraw()
+  for _,fixtures in pairs(self.fixtures) do
+    for _,f in pairs(fixtures) do
+      if not f:isDestroyed() then
+        love.graphics.setColor({0, 0, 150})
+
+        local shape = f:getShape()
+        if shape:getType() == 'circle' then
+          local body = f:getBody()
+          local x,y = body:getPosition()
+          local radius = shape:getRadius()
+          love.graphics.circle('line', x, y, radius, 2 * radius)
+        end
+      end
+    end
+  end
+end
+
 local function createFixture(self, entity, shape)
   local body = self.physicsBodyComponent:body(entity.id)
   assert(body, 'Collider must already have a physics body')
@@ -46,16 +64,18 @@ local function createFixture(self, entity, shape)
   events.observeEntity('destroyed', entity.id, function()
     self.fixtures[entity.id] = nil
   end)
+
+  return fixture
 end
 
 function ColliderComponent:createCircle(entity, radius)
   local shape = love.physics.newCircleShape(radius)
-  createFixture(self, entity, shape)
+  return createFixture(self, entity, shape)
 end
 
 function ColliderComponent:createPolygon(entity, ...)
   local shape = love.physics.newPolygonShape(...)
-  createFixture(self, entity, shape)
+  return createFixture(self, entity, shape)
 end
 
 function ColliderComponent:shape(id)

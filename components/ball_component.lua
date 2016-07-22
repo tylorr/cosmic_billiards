@@ -16,6 +16,7 @@ end
 
 function BallComponent:monitorPocket(ball)
   local fixture = self.colliderComponent:fixture(ball)
+  assert(fixture, 'ball component missing collider: ' .. ball)
 
   local pocketCollision = 
     co.observe(events.physics, 'collide', 'beginContact', fixture)
@@ -25,9 +26,9 @@ function BallComponent:monitorPocket(ball)
       end)
 
   for pocketFixture in yield, pocketCollision do
-    co.runUntil(
-      co.create(self.checkFall, self, ball, pocketFixture), 
-      co.observe(events.physics, 'collide', 'endContact', fixture, pocketFixture))
+    local checkFall = co.create(self.checkFall, self, ball, pocketFixture)
+    local endContact = co.observe(events.physics, 'collide', 'endContact', fixture, pocketFixture)
+    yield(checkFall:takeUntil(endContact))
   end
 end
 

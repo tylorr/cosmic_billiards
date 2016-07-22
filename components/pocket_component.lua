@@ -1,6 +1,6 @@
 local class = require 'middleclass'
 
-local PocketCompnent = class('PocketCompnent')
+local PocketCompnent = class('PocketComponent')
 
 function PocketCompnent:initialize()
   self.pockets = {}

@@ -1,32 +1,27 @@
-local EntityManager = require 'entity_manager'
-local BehaviourComponent = require 'components.behaviour_component'
-local TransformComponent = require 'components.transform_component'
-local PhysicsBodyComponent = require 'components.physics_body_component'
-local ColliderComponent = require 'components.collider_component'
-local CircleComponent = require 'components.circle_component'
-local PolygonComponent = require 'components.polygon_component'
-local CueBallComponent = require 'components.cue_ball_component'
-local BallComponent = require 'components.ball_component'
-local PocketComponent = require 'components.pocket_component'
-local CameraComponent = require 'components.camera_component'
+require 'coex'
 local flatten = require('functional').flatten
+local map = require('functional').map
+local lowerFirst = require('string_util').lowercaseFirst
+local lmap = require('list').map
 local events = require 'events'
 -- local inspect = require 'inspect'
 
-require 'coex'
+local dependencies = {
+  { 'entity_manager' },
+  { 'components.behaviour_component' },
+  { 'components.transform_component' },
+  { 'components.physics_body_component',  'physicsWorld', 'transformComponent' },
+  { 'components.collider_component',      'physicsWorld', 'physicsBodyComponent' },
+  { 'components.circle_component',        'transformComponent' },
+  { 'components.polygon_component',       'transformComponent' },
+  { 'components.cue_ball_component',      'transformComponent', 'physicsBodyComponent' },
+  { 'components.pocket_component' },
+  { 'components.ball_component',          'entityManager', 'behaviourComponent', 'pocketComponent', 'colliderComponent' },
+  { 'components.camera_component',        'behaviourComponent', 'transformComponent' },
+  { 'components.gravity_component' },
+}
 
-local entityManager,
-      behaviourComponent,
-      transformComponent,
-      physicsBodyComponent,
-      colliderComponent,
-      circleComponent,
-      polygonComponent,
-      cueBallComponent,
-      ballComponent,
-      pocketComponent,
-      cameraComponent,
-      physicsWorld
+local container = {}
 
 local function randomColor()
   local r = love.math.random
@@ -34,13 +29,13 @@ local function randomColor()
 end
 
 local function createPocket(radius)
-  local entity = entityManager:create()
-  transformComponent:create(entity)
-  physicsBodyComponent:create(entity, 'static')
-  colliderComponent:createCircle(entity, radius)
-  colliderComponent:fixture(entity.id):setSensor(true)
-  circleComponent:create(entity, 'fill', {0, 0, 0}, radius)
-  pocketComponent:create(entity)
+  local entity = container.entityManager:create()
+  container.transformComponent:create(entity)
+  container.physicsBodyComponent:create(entity, 'static')
+  container.colliderComponent:createCircle(entity, radius)
+  container.colliderComponent:fixture(entity.id):setSensor(true)
+  container.circleComponent:create(entity, 'fill', {0, 0, 0}, radius)
+  container.pocketComponent:create(entity)
   return entity
 end
 
@@ -60,13 +55,13 @@ local function createPockets(radius)
 
   for _, coord in ipairs(pocketCoordinates) do
     local entity = createPocket(radius)
-    transformComponent:setPosition(entity.id, coord)
+    container.transformComponent:setPosition(entity.id, coord)
   end
 end
 
 local function createCushion(length, depth, leftAngle, rightAngle)
-  local entity = entityManager:create()
-  transformComponent:create(entity)
+  local entity = container.entityManager:create()
+  container.transformComponent:create(entity)
 
   local points = {}
   local hl = length / 2.0
@@ -83,13 +78,13 @@ local function createCushion(length, depth, leftAngle, rightAngle)
 
   points = flatten(points, true)
 
-  physicsBodyComponent:create(entity, 'static')
-  colliderComponent:createPolygon(entity, unpack(points))
+  container.physicsBodyComponent:create(entity, 'static')
+  container.colliderComponent:createPolygon(entity, unpack(points))
 
-  local fixture = colliderComponent:fixture(entity.id)
+  local fixture = container.colliderComponent:fixture(entity.id)
   fixture:setRestitution(1)
 
-  polygonComponent:create(entity, 'fill', {20, 100, 100}, unpack(points))
+  container.polygonComponent:create(entity, 'fill', {20, 100, 100}, unpack(points))
 
   return entity
 end
@@ -116,25 +111,26 @@ local function createCushions(pocketRadius)
   for _,cushionParams in ipairs(cushParamList) do
     local x, y, length, leftAngle, rightAngle, rotation = unpack(cushionParams)
     local cushion = createCushion(length, cushionDepth, leftAngle, rightAngle)
-    transformComponent:setPosition(cushion.id, {x, y})
-    transformComponent:setRotation(cushion.id, rotation)
+    container.transformComponent:setPosition(cushion.id, {x, y})
+    container.transformComponent:setRotation(cushion.id, rotation)
   end
 end
 
 local function createBall(radius, color)
-  local entity = entityManager:create()
-  transformComponent:create(entity)
-  physicsBodyComponent:create(entity, 'dynamic')
-  colliderComponent:createCircle(entity, radius)
-  circleComponent:create(entity, 'fill', color, radius)
-  ballComponent:create(entity)
+  local entity = container.entityManager:create()
+  container.transformComponent:create(entity)
+  container.physicsBodyComponent:create(entity, 'dynamic')
+  container.colliderComponent:createCircle(entity, radius)
+  container.circleComponent:create(entity, 'fill', color, radius)
+  container.ballComponent:create(entity)
+  container.gravityComponent:create(entity)
 
-  local body = physicsBodyComponent:body(entity.id)
+  local body = container.physicsBodyComponent:body(entity.id)
   body:setLinearDamping(1.0)
   body:setAngularDamping(1.0)
   body:setBullet(true)
 
-  local fixture = colliderComponent:fixture(entity.id)
+  local fixture = container.colliderComponent:fixture(entity.id)
   fixture:setRestitution(1)
 
   return entity
@@ -144,44 +140,81 @@ local function createBalls()
   local ballRadius = 12
 
   local cue = createBall(ballRadius, {255, 255, 255})
-  cueBallComponent:create(cue)
-  transformComponent:setPosition(cue.id, {200, 200})
+  container.cueBallComponent:create(cue)
+  container.transformComponent:setPosition(cue.id, {200, 200})
 
   local ball
   ball = createBall(ballRadius, randomColor())
-  transformComponent:setPosition(ball.id, {200, 400})
+  container.transformComponent:setPosition(ball.id, {200, 400})
 
   ball = createBall(ballRadius, randomColor())
-  transformComponent:setPosition(ball.id, {300, 400})
+  container.transformComponent:setPosition(ball.id, {300, 400})
 
   ball = createBall(ballRadius, randomColor())
-  transformComponent:setPosition(ball.id, {200, 600})
+  container.transformComponent:setPosition(ball.id, {200, 600})
 
   ball = createBall(ballRadius, randomColor())
-  transformComponent:setPosition(ball.id, {200, 800})
+  container.transformComponent:setPosition(ball.id, {200, 800})
 
   ball = createBall(ballRadius, randomColor())
-  transformComponent:setPosition(ball.id, {300, 600})
+  container.transformComponent:setPosition(ball.id, {300, 600})
 
   ball = createBall(ballRadius, randomColor())
-  transformComponent:setPosition(ball.id, {300, 800})
+  container.transformComponent:setPosition(ball.id, {300, 800})
+end
+
+local function createStar(radius, gravityRadius)
+  local entity = container.entityManager:create()
+  container.transformComponent:create(entity)
+  container.physicsBodyComponent:create(entity, 'dynamic')
+  container.circleComponent:create(entity, 'fill', { 200, 200, 0 }, radius)
+
+  local fixture = container.colliderComponent:createCircle(entity, radius)
+  fixture:setDensity(gravityRadius)
+  fixture:setRestitution(1)
+
+  local gravityFixture = container.colliderComponent:createCircle(entity, gravityRadius)
+  gravityFixture:setSensor(true)
+  gravityFixture:setDensity(10)
+
+  local body = container.physicsBodyComponent:body(entity.id)
+  body:setLinearDamping(1.0)
+  body:setAngularDamping(1.0)
+  -- body:setBullet(true)
+  -- body:setMass(500)
+  body:resetMassData()
+
+  container.gravityComponent:create(entity, gravityFixture)
+
+  print('star mass: ', body:getMass())  
+
+  return entity
+end
+
+local function instantiateContainer()
+  local function instantiate(package, ...)
+    local klass = require(package)
+    local name = lowerFirst(klass.name)
+
+    if klass.dependencies then
+      return name, klass(unpack(map(klass.dependencies, function(d) return container[d] end)))
+    end
+
+    return name, klass(lmap(function(d) return container[d] end, ...))
+  end
+
+  for _,deps in ipairs(dependencies) do
+    local name,instance = instantiate(unpack(deps))
+    -- print(name)
+    container[name] = instance
+  end
 end
 
 function love.load()
-  love.graphics.setBackgroundColor(0, 150, 0)
-  physicsWorld = love.physics.newWorld(0, 0, false)
+  container.physicsWorld = love.physics.newWorld(0, 0, false)
+  instantiateContainer()
 
-  entityManager = EntityManager()
-  behaviourComponent = BehaviourComponent()
-  transformComponent = TransformComponent()
-  physicsBodyComponent = PhysicsBodyComponent(physicsWorld, transformComponent)
-  colliderComponent = ColliderComponent(physicsWorld, physicsBodyComponent)
-  circleComponent = CircleComponent(transformComponent)
-  polygonComponent = PolygonComponent(transformComponent)
-  cueBallComponent = CueBallComponent(transformComponent, physicsBodyComponent)
-  pocketComponent = PocketComponent()
-  ballComponent = BallComponent(entityManager, behaviourComponent, pocketComponent, colliderComponent)
-  cameraComponent = CameraComponent(behaviourComponent, transformComponent)
+  love.graphics.setBackgroundColor(0, 150, 0)
 
   local pocketRadius = 30
 
@@ -189,9 +222,12 @@ function love.load()
   createCushions(pocketRadius)
   createBalls()
 
-  local camera = entityManager:create()
-  transformComponent:create(camera)
-  cameraComponent:create(camera)
+  local star = createStar(20, 200)
+  container.transformComponent:setPosition(star.id, {250, 500})
+
+  local camera = container.entityManager:create()
+  container.transformComponent:create(camera)
+  container.cameraComponent:create(camera)
 end
 
 function love.mousepressed(x, y, button)
@@ -203,14 +239,17 @@ function love.mousereleased(x, y, button)
 end
 
 function love.update(dt)
-  physicsWorld:update(dt)
-  behaviourComponent:update(dt)
-  physicsBodyComponent:updateTransforms()
+  container.physicsWorld:update(dt)
+  container.behaviourComponent:update(dt)
+  container.physicsBodyComponent:updateTransforms()
 end
 
 function love.draw()
-  cameraComponent:set()
-  circleComponent:draw()
-  polygonComponent:draw()
-  cameraComponent:unset()
+  container.cameraComponent:set()
+
+  container.circleComponent:draw()
+  container.polygonComponent:draw()
+  container.colliderComponent:debugDraw()
+
+  container.cameraComponent:unset()
 end
