@@ -21,7 +21,13 @@ end
 
 function Signal:notify(...)
   for i = 1, #self do
-    self[i].m(self[i].o, ...)
+    local s = self[i]
+
+    -- Possible that a notification from a previous iteration caused 
+    -- this listener to deregister leading to nil value here
+    if s then
+      s.m(s.o, ...)
+    end
   end
 end
 
