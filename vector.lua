@@ -51,11 +51,11 @@ function Vector:__len()
   return self:magnitude()
 end
 
-function Vector:txy()
+function Vector:pack()
   return {self.x, self.y}
 end
 
-function Vector:xy()
+function Vector:unpack()
   return self.x, self.y
 end
 

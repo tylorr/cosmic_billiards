@@ -27,7 +27,7 @@ function CameraComponent:monitorDrag()
     local updateUntilReleased = behaviour:updateUntil(co.observe(events.input, 'mouse', 'released', 2))
     while yield(updateUntilReleased) do
       local pos = startPos - (Vector(love.mouse.getPosition()) - startMousePos)
-      transform:setPosition(self.camera, pos:txy())
+      transform:setPosition(self.camera, pos:pack())
     end
   end
 end

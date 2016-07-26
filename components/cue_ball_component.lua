@@ -30,7 +30,7 @@ function CueBallComponent:shootFrom(x, y)
   local mouseToCue = cuePos - mousePos
 
   local body = self.physicsBodyComponent:body(self.cue)
-  body:applyLinearImpulse(mouseToCue:xy())
+  body:applyLinearImpulse(mouseToCue:unpack())
 end
 
 return CueBallComponent

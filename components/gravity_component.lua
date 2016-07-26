@@ -38,7 +38,7 @@ local function applyGravity(self, id, fixture, otherFixture)
     local force = GRAVITY * (combinedMass / squareDistance)
     -- print(squareDistance, combinedMass, force)
     force = force * selfToGravitor:normalized()
-    body:applyForce(force:xy())
+    body:applyForce(force:unpack())
   end
 end
 
