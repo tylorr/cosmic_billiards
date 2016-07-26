@@ -46,7 +46,7 @@ local function monitorGravity(self, id)
   local fixture = self.colliderComponent:fixture(id)
   assert(fixture, 'gravity component missing collider: ' .. id)
 
-  local gravityFieldCollision = 
+  local gravityFieldCollision =
     co.observe(events.physics, 'collide', 'beginContact', fixture)
       :filter(function(otherFixture)
         local otherId = otherFixture:getUserData()
@@ -55,7 +55,7 @@ local function monitorGravity(self, id)
 
   local behaviour = self.behaviourComponent
   for otherFixture in yield, gravityFieldCollision do
-    behaviour:runUntil(id, 
+    behaviour:runUntil(id,
       co.create(applyGravity, self, id, fixture, otherFixture),
       co.observe(events.physics, 'collide', 'endContact', fixture, otherFixture))
   end

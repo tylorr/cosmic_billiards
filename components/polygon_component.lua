@@ -2,6 +2,10 @@ local class = require 'middleclass'
 
 local PolygonComponent = class('PolygonComponent')
 
+PolygonComponent.static.dependencies = {
+  'transformComponent'
+}
+
 function PolygonComponent:initialize(transformComponent)
   self.transformComponent = transformComponent
   self.polygons = {}

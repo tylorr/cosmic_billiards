@@ -3,6 +3,10 @@ local events = require 'events'
 
 local CircleComponent = class('CircleComponent')
 
+CircleComponent.static.dependencies = {
+  'transformComponent'
+}
+
 function CircleComponent:initialize(transformComponent)
   self.transformComponent = transformComponent
   self.circles = {}

@@ -2,23 +2,22 @@ require 'coex'
 local flatten = require('functional').flatten
 local map = require('functional').map
 local lowerFirst = require('string_util').lowercaseFirst
-local lmap = require('list').map
 local events = require 'events'
--- local inspect = require 'inspect'
+local inspect = require 'inspect'
 
-local dependencies = {
-  { 'entity_manager' },
-  { 'components.behaviour_component' },
-  { 'components.transform_component' },
-  { 'components.physics_body_component',  'physicsWorld', 'transformComponent' },
-  { 'components.collider_component',      'physicsWorld', 'physicsBodyComponent' },
-  { 'components.circle_component',        'transformComponent' },
-  { 'components.polygon_component',       'transformComponent' },
-  { 'components.cue_ball_component',      'transformComponent', 'physicsBodyComponent' },
-  { 'components.pocket_component' },
-  { 'components.ball_component',          'entityManager', 'behaviourComponent', 'pocketComponent', 'colliderComponent' },
-  { 'components.camera_component',        'behaviourComponent', 'transformComponent' },
-  { 'components.gravity_component' },
+local packages = {
+  'entity_manager',
+  'components.behaviour_component',
+  'components.transform_component',
+  'components.physics_body_component',
+  'components.collider_component',
+  'components.circle_component',
+  'components.polygon_component',
+  'components.cue_ball_component',
+  'components.pocket_component',
+  'components.ball_component',
+  'components.camera_component',
+  'components.gravity_component',
 }
 
 local container = {}
@@ -186,33 +185,26 @@ local function createStar(radius, gravityRadius)
 
   container.gravityComponent:create(entity, gravityFixture)
 
-  print('star mass: ', body:getMass())  
+  print('star mass: ', body:getMass())
 
   return entity
 end
 
-local function instantiateContainer()
-  local function instantiate(package, ...)
+local function buildContainer()
+  for _,package in ipairs(packages) do
     local klass = require(package)
     local name = lowerFirst(klass.name)
 
-    if klass.dependencies then
-      return name, klass(unpack(map(klass.dependencies, function(d) return container[d] end)))
-    end
+    local deps = klass.dependencies or {}
+    local instance = klass(unpack(map(deps, function(d) return container[d] end)))
 
-    return name, klass(lmap(function(d) return container[d] end, ...))
-  end
-
-  for _,deps in ipairs(dependencies) do
-    local name,instance = instantiate(unpack(deps))
-    -- print(name)
     container[name] = instance
   end
 end
 
 function love.load()
   container.physicsWorld = love.physics.newWorld(0, 0, false)
-  instantiateContainer()
+  buildContainer()
 
   love.graphics.setBackgroundColor(0, 150, 0)
 

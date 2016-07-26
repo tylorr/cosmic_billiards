@@ -4,6 +4,11 @@ local triggerPhysics = require('events').triggerPhysics
 
 local ColliderComponent = class('ColliderComponent')
 
+ColliderComponent.static.dependencies = {
+  'physicsWorld',
+  'physicsBodyComponent'
+}
+
 local function beginContact(a, b, contact)
   triggerPhysics('collide', 'beginContact', a, b, contact)
   triggerPhysics('collide', 'beginContact', b, a, contact)

@@ -3,6 +3,11 @@ local events = require 'events'
 
 local PhysicsBodyComponent = class('PhysicsBodyComponent')
 
+PhysicsBodyComponent.static.dependencies = {
+  'physicsWorld',
+  'transformComponent'
+}
+
 function PhysicsBodyComponent:initialize(physicsWorld, transformComponent)
   self.physicsWorld = physicsWorld
   self.transformComponent = transformComponent

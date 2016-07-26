@@ -5,6 +5,11 @@ local bind = require('functional').bind
 
 local CueBallComponent = class('CueBallComponent')
 
+CueBallComponent.static.dependencies = {
+  'transformComponent',
+  'physicsBodyComponent',
+}
+
 function CueBallComponent:initialize(transformComponent, physicsBodyComponent)
   self.transformComponent = transformComponent
   self.physicsBodyComponent = physicsBodyComponent

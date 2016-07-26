@@ -6,6 +6,13 @@ local yield = coroutine.yield
 
 local BallComponent = class('BallComponent')
 
+BallComponent.static.dependencies = {
+  'entityManager',
+  'behaviourComponent',
+  'pocketComponent',
+  'colliderComponent',
+}
+
 function BallComponent:initialize(entityManager, behaviourComponent, pocketComponent, colliderComponent)
   self.entityManager = entityManager
   self.behaviourComponent = behaviourComponent
@@ -18,7 +25,7 @@ function BallComponent:monitorPocket(ball)
   local fixture = self.colliderComponent:fixture(ball)
   assert(fixture, 'ball component missing collider: ' .. ball)
 
-  local pocketCollision = 
+  local pocketCollision =
     co.observe(events.physics, 'collide', 'beginContact', fixture)
       :filter(function(otherFixture)
         local otherId = otherFixture:getUserData()
